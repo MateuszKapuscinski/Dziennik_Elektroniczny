@@ -1,6 +1,6 @@
 package com.sda.jz75_security_template.service;
 
-import com.sda.jz75_security_template.model.Account;
+import com.sda.jz75_security_template.model.account.Account;
 import com.sda.jz75_security_template.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

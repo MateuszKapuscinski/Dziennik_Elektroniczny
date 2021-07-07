@@ -1,10 +1,10 @@
 package com.sda.jz75_security_template.service;
 
 import com.sda.jz75_security_template.exception.InvalidRegisterData;
-import com.sda.jz75_security_template.model.Account;
-import com.sda.jz75_security_template.model.AccountRole;
-import com.sda.jz75_security_template.model.CreateAccountRequest;
-import com.sda.jz75_security_template.model.RolesDto;
+import com.sda.jz75_security_template.model.account.Account;
+import com.sda.jz75_security_template.model.account.AccountRole;
+import com.sda.jz75_security_template.model.account.CreateAccountRequest;
+import com.sda.jz75_security_template.model.account.RolesDto;
 import com.sda.jz75_security_template.repository.AccountRepository;
 import com.sda.jz75_security_template.repository.AccountRoleRepository;
 import lombok.RequiredArgsConstructor;

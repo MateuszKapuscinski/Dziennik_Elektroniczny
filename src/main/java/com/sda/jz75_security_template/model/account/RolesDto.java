@@ -1,4 +1,4 @@
-package com.sda.jz75_security_template.model;
+package com.sda.jz75_security_template.model.account;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

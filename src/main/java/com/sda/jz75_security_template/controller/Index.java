@@ -1,10 +1,9 @@
 package com.sda.jz75_security_template.controller;
 
 import com.sda.jz75_security_template.exception.InvalidRegisterData;
-import com.sda.jz75_security_template.model.Account;
-import com.sda.jz75_security_template.model.CreateAccountRequest;
+import com.sda.jz75_security_template.model.account.Account;
+import com.sda.jz75_security_template.model.account.CreateAccountRequest;
 import com.sda.jz75_security_template.service.AccountService;
-import com.sda.jz75_security_template.service.FavouriteDogNameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +21,6 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class Index {
     private final AccountService accountService;
-    private final FavouriteDogNameService favouriteDogNameService;
 
     @GetMapping
     public String getIndex(){
@@ -68,7 +66,6 @@ public class Index {
             if(usernamePasswordAuthenticationToken.getPrincipal() instanceof Account) {
                 Account account = (Account) usernamePasswordAuthenticationToken.getPrincipal();
                 model.addAttribute("uzytkownik", account);
-                model.addAttribute("favouriteDogNamesList", favouriteDogNameService.favouriteDogNameList(account));
             }
         }
         return "authenticated";

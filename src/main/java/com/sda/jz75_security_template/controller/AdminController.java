@@ -1,8 +1,7 @@
 package com.sda.jz75_security_template.controller;
 
-import com.sda.jz75_security_template.configuration.DataInitializer;
-import com.sda.jz75_security_template.model.Account;
-import com.sda.jz75_security_template.model.RolesDto;
+import com.sda.jz75_security_template.model.account.Account;
+import com.sda.jz75_security_template.model.account.RolesDto;
 import com.sda.jz75_security_template.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

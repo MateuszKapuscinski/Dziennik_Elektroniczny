@@ -1,7 +1,7 @@
 package com.sda.jz75_security_template.configuration;
 
-import com.sda.jz75_security_template.model.Account;
-import com.sda.jz75_security_template.model.AccountRole;
+import com.sda.jz75_security_template.model.account.Account;
+import com.sda.jz75_security_template.model.account.AccountRole;
 import com.sda.jz75_security_template.repository.AccountRepository;
 import com.sda.jz75_security_template.repository.AccountRoleRepository;
 import lombok.RequiredArgsConstructor;

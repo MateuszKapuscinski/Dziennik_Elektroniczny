@@ -31,7 +31,7 @@
                             <a class="nav-link" th:href="@{/admin}">Admin</a>
                         </li>
                     </ul>
-                    <div th:if="${username}" class="user-identity" th:text="${username}"></div>
+                    <div  th:if="${username}" class="user-identity" th:text="${username}"></div>
                     <ul class="d-flex align-content-end">
                         <li>
                             <a sec:authorize="!isAuthenticated()" th:href="@{/login}">
