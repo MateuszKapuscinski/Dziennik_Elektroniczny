@@ -21,12 +21,12 @@ public class Dyplom {
     @ManyToOne()
     @ToString.Exclude
     @JsonBackReference
-    private Klasa klasaPole;
+    private Klasa klasa;
 
     @ManyToOne()
     @ToString.Exclude
     @JsonBackReference
-    private Uczen uczenDyplom;
+    private Uczen uczen;
 
     private Double sredniaOcen;
 

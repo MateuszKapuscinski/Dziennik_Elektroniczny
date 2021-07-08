@@ -1,5 +1,7 @@
 package com.sda.jz75_security_template.model.account;
 
+import com.sda.jz75_security_template.model.Nauczyciel;
+import com.sda.jz75_security_template.model.Uczen;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,8 +33,14 @@ public class Account implements UserDetails {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
+    @OneToOne(optional = true)
+    private Nauczyciel nauczyciel;
+
+    @OneToOne(optional = true)
+    private Uczen uczen;
+
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<AccountRole> roles;
+    private Set<AccountRole> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -11,7 +11,7 @@
     <div class="container marketing">
         <hr>
         <h2>Register new account:</h2>
-        <form th:action="@{/register}" method="post">
+        <form th:action="@{/teacher/register/student}" method="post">
             <div th:if="${error_msg}" class="row col-12 form-container" th:text="${error_msg}">
             </div>
             <div class="row col-12 form-container">

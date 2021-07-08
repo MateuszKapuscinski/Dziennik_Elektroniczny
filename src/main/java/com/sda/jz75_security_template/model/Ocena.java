@@ -20,7 +20,7 @@ public class Ocena {
     @ManyToOne()
     @ToString.Exclude
     @JsonBackReference
-    private Uczen uczenOcena;
+    private Uczen uczen;
 
     private int ocena;
 

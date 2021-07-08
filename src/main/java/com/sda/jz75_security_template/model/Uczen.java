@@ -1,10 +1,7 @@
 package com.sda.jz75_security_template.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,6 +11,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Uczen {
@@ -32,16 +30,18 @@ public class Uczen {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataUrodzenia;
 
-    @OneToMany(mappedBy = "uczenDyplom",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "uczen",fetch = FetchType.LAZY)
     @ToString.Exclude
     @JsonBackReference
-    private List<Dyplom> ListaDyplomow;
+    @EqualsAndHashCode.Exclude
+    private Set<Dyplom> dyplomy;
 
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Klasa> klasaSet;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Set<Klasa> klasy;
 
     //dalem lazy bo wywalało błąd
-    @OneToMany(mappedBy = "uczenOcena", fetch = FetchType.LAZY)
-    private List<Ocena> ocenaList;
+    @OneToMany(mappedBy = "uczen", fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Set<Ocena> oceny;
 }

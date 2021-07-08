@@ -40,7 +40,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         }
 
         addUser(ADMIN_USERNAME, ADMIN_PASSWORD, AVAILABLE_ROLES);
-        addUser("user", "resu", new String[] {ROLE_USER});
+//        addUser("user", "resu", new String[] {ROLE_USER});
     }
 
     private void addUser(String username, String password, String[] roles) {

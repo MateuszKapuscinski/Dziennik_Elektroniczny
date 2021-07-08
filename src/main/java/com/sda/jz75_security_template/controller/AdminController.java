@@ -1,6 +1,9 @@
 package com.sda.jz75_security_template.controller;
 
+import com.sda.jz75_security_template.exception.InvalidRegisterData;
+import com.sda.jz75_security_template.model.Przedmiot;
 import com.sda.jz75_security_template.model.account.Account;
+import com.sda.jz75_security_template.model.account.CreateTeacherAccountRequest;
 import com.sda.jz75_security_template.model.account.RolesDto;
 import com.sda.jz75_security_template.service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -87,4 +90,25 @@ public class AdminController {
         accountService.updateAccount(account, new RolesDto(admin, supervisor, user));
         return "redirect:/admin/accounts";
     }
+
+    @GetMapping("/register/teacher")
+    public String getRegisterPage(Model model){
+        model.addAttribute("przedmioty", Przedmiot.values());
+        return "register-teacher";
+    }
+
+    @PostMapping("/register/teacher")
+    public String submitRegisterPage(Model model, CreateTeacherAccountRequest request){
+        try{
+            boolean success = accountService.registerTeacher(request);
+            if(success) {
+                return "redirect:/login";
+            }
+        }catch (InvalidRegisterData ird){
+            model.addAttribute("error_msg", ird.getMessage());
+            model.addAttribute("prev_user", request.getUsername());
+        }
+        return "register-teacher";
+    }
+
 }

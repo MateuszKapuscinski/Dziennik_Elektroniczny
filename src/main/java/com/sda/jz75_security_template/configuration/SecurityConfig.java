@@ -25,11 +25,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         "/",
-                        "/register",        // get
                         "/webjars/**",
                         "/css/**",
                         "/js/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/register").permitAll() // pozwól wysłać zapytanie rejestracji
+                .antMatchers(HttpMethod.POST, "/teacher/register/student").hasRole("SUPERVISOR")
+                .antMatchers(HttpMethod.GET, "/teacher/register/student").hasRole("SUPERVISOR")
+                .antMatchers(HttpMethod.POST, "/admin/register/teacher").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/admin/register/teacher").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()

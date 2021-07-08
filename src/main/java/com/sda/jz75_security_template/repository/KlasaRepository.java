@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface KlasaRepository extends JpaRepository<Klasa, Long> {
-
+    List<Klasa> findAllByWychowawca(Nauczyciel poleNauczyciel);
 }
