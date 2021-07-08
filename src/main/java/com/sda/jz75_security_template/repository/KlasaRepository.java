@@ -1,8 +1,11 @@
 package com.sda.jz75_security_template.repository;
 
 import com.sda.jz75_security_template.model.Klasa;
+import com.sda.jz75_security_template.model.Nauczyciel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface KlasaRepository extends JpaRepository<Klasa, Long> {

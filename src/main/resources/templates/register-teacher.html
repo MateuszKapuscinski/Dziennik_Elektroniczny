@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+    <div class="container marketing">
+        <hr>
+        <h2>Register new account:</h2>
+        <form th:action="@{/admin/register/teacher}" method="post">
+            <div th:if="${error_msg}" class="row col-12 form-container" th:text="${error_msg}">
+            </div>
+            <div class="row col-12 form-container">
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="username">Username:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="username" th:name="username" th:value="${prev_user}">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="password" id="password" th:name="password">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="confirmPassword">Confirm password:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="password" id="confirmPassword" th:name="confirmPassword">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="imie">Imie:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="imie" th:name="imie">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="nazwisko">Nazwisko:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="nazwisko" th:name="nazwisko">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="email" th:name="email">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="przedmiot">Przedmiot:</label>
+                    </div>
+                    <select th:name="przedmiot" id="przedmiot">
+                        <option th:each="przed : ${przedmioty}" th:text="${przed}" th:value="${przed}"></option>
+                    </select>
+                </div>
+                <div class="row col-md-12 form-button-row">
+                    <div class="col-md-6">
+                        <button type="reset" class="btn btn-warning offset-3 col-md-6">Reset</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary offset-3 col-md-6">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </hr>
+    </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>
