@@ -23,6 +23,11 @@ public class Dyplom {
     @JsonBackReference
     private Klasa klasaPole;
 
+    @ManyToOne()
+    @ToString.Exclude
+    @JsonBackReference
+    private Uczen uczenDyplom;
+
     private Double sredniaOcen;
 
     private String opis;

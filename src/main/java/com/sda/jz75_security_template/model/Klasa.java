@@ -19,13 +19,13 @@ public class Klasa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(mappedBy = "poleklasa",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "klasaSet",fetch = FetchType.EAGER)
     @ToString.Exclude
     @JsonBackReference
     private Set<Uczen> uczenSet;
 
-    @OneToMany(mappedBy = "poleDyplom",fetch = FetchType.EAGER)
-    private List<Dyplom> dyplomList;
+    @OneToMany(mappedBy = "klasaPole",fetch = FetchType.EAGER)
+    private List<Dyplom> ListDyplom;
 
     @ManyToOne()
     @ToString.Exclude
