@@ -9,11 +9,13 @@
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
     <div class="container marketing">
-        <h2>Admin available</h2>
+        <h2>Dostęp admina</h2>
         <ul>
             <li>
-                <a th:href="@{/admin/accounts}">Account List</a>
-                <a th:href="@{/admin/register/teacher}">Register teacher</a>
+                <a th:href="@{/admin/register/teacher}">Rejestracja konta nauczyciela</a>
+                <a th:href="@{/admin/accounts}">Lista stworzonych kont</a>
+                <a th:href="@{/admin/add}">Stwórz nauczyciela</a>
+                <a th:href="@{/admin/lista/nauczycieli}">Lista nauczycieli</a>
             </li>
         </ul>
     </div>

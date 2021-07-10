@@ -1,11 +1,15 @@
 package com.sda.jz75_security_template.controller;
 
 import com.sda.jz75_security_template.exception.InvalidRegisterData;
+import com.sda.jz75_security_template.model.Nauczyciel;
+import com.sda.jz75_security_template.model.PoziomKlasy;
 import com.sda.jz75_security_template.model.Przedmiot;
 import com.sda.jz75_security_template.model.account.Account;
 import com.sda.jz75_security_template.model.account.CreateTeacherAccountRequest;
 import com.sda.jz75_security_template.model.account.RolesDto;
+import com.sda.jz75_security_template.repository.NauczycielRepository;
 import com.sda.jz75_security_template.service.AccountService;
+import com.sda.jz75_security_template.service.NauczycielService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 import static com.sda.jz75_security_template.configuration.DataInitializer.*;
@@ -31,6 +36,7 @@ import static com.sda.jz75_security_template.configuration.DataInitializer.*;
 @RequiredArgsConstructor
 public class AdminController {
     private final AccountService accountService;
+    private final NauczycielService nauczycielService;
 
     @GetMapping
     public String getIndex() {
@@ -110,5 +116,47 @@ public class AdminController {
         }
         return "register-teacher";
     }
+
+    @PostMapping("/add")
+    public String dodawanieNauczyciela(Nauczyciel nauczyciel) {
+        log.info("nauczyciel do zapisu" + nauczyciel);
+        nauczycielService.dodajNauczyciela(nauczyciel);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/add")
+    public String dodawanieNauczycielGet(Model model) {
+        Nauczyciel nauczyciel = new Nauczyciel();
+        model.addAttribute("nowy_nauczyciel", nauczyciel);
+        model.addAttribute("lista_przedmiotow", Przedmiot.values());
+        model.addAttribute("lista_klas", PoziomKlasy.values());
+        return "nauczyciel-add";
+    }
+
+    @GetMapping("/edit")
+    public String edycjaNauczyciela(Model model,@RequestParam(name = "id_nauczyciel_do_edycji") Long id){
+        Optional<Nauczyciel> nauczycielEdytowany = nauczycielService.zwrocNauczycielaPoId(id);
+        if (nauczycielEdytowany.isPresent()){
+            model.addAttribute("nowy_nauczyciel", nauczycielEdytowany.get());
+            log.info("Nauczyciel do edycji" + nauczycielEdytowany);
+            return "nauczyciel-add";
+        }
+        // jeśli nie udało się znaleźć nauczyciela, to wracamy na listę nauczycieli
+        return "lista-nauczycieli";
+    }
+
+    @GetMapping("lista/nauczycieli")
+    public String wyswietlaListeWszystkichNauczycieli(Model model) {
+        List<Nauczyciel> nauczycielList = nauczycielService.zwrocWszystkich();
+
+        model.addAttribute("lista_nauczycieli",nauczycielList);
+        return "lista-nauczycieli";
+    }
+
+/*    @GetMapping()
+    public String wyswietlaListeNauczycieliPoPrzedmiotach(Model model) {
+        List<Nauczyciel> nauczycielList = nauczycielService.wyszukajNauczycieliPoPrzedmiocie();
+
+    }*/
 
 }
