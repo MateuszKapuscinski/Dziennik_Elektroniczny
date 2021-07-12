@@ -121,7 +121,7 @@ public class AdminController {
     public String dodawanieNauczyciela(Nauczyciel nauczyciel) {
         log.info("nauczyciel do zapisu" + nauczyciel);
         nauczycielService.dodajNauczyciela(nauczyciel);
-        return "redirect:/admin";
+        return "redirect:/admin/add";
     }
 
     @GetMapping("/add")
@@ -137,12 +137,14 @@ public class AdminController {
     public String edycjaNauczyciela(Model model,@RequestParam(name = "id_nauczyciel_do_edycji") Long id){
         Optional<Nauczyciel> nauczycielEdytowany = nauczycielService.zwrocNauczycielaPoId(id);
         if (nauczycielEdytowany.isPresent()){
-            model.addAttribute("nowy_nauczyciel", nauczycielEdytowany.get());
             log.info("Nauczyciel do edycji" + nauczycielEdytowany);
+            model.addAttribute("nowy_nauczyciel", nauczycielEdytowany.get());
+            model.addAttribute("lista_przedmiotow", Przedmiot.values());
+            model.addAttribute("lista_klas", PoziomKlasy.values());
             return "nauczyciel-add";
         }
         // jeśli nie udało się znaleźć nauczyciela, to wracamy na listę nauczycieli
-        return "lista-nauczycieli";
+        return "redirect:/lista/nauczycieli";
     }
 
     @GetMapping("lista/nauczycieli")
@@ -151,6 +153,12 @@ public class AdminController {
 
         model.addAttribute("lista_nauczycieli",nauczycielList);
         return "lista-nauczycieli";
+    }
+
+    @GetMapping("/usun")
+    public String usunNauczyciela(@RequestParam(name = "id") Long idTemp) {
+        nauczycielService.usunNauczyciela(idTemp);
+        return "redirect:/admin/lista/nauczycieli";
     }
 
 /*    @GetMapping()
