@@ -37,6 +37,8 @@ public class Account implements UserDetails {
     private Nauczyciel nauczyciel;
 
     @OneToOne(optional = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Uczen uczen;
 
     @ManyToMany(fetch = FetchType.EAGER)

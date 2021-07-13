@@ -33,13 +33,13 @@ public class Klasa {
     private Nauczyciel wychowawca;
 
     @Enumerated(value = EnumType.STRING)
-    private PoziomKlasy poziomKlasy;
+    private PoziomKlasy poziom_klasy;
 
     private int rocznik;
 
     private String nazwa;
 
-    private  int numerSali;
+    private  int numer_sali;
 
 
 }

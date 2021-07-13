@@ -1,50 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Register Page</title>
+    <title>Hello Admin Account List!</title>
     <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
 </head>
 <body>
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
     <div class="container marketing">
-        <hr>
-        <h2>Register new account:</h2>
-        <form th:action="@{/teacher/register/student}" method="post">
-            <div th:if="${error_msg}" class="row col-12 form-container" th:text="${error_msg}">
-            </div>
+        <h2>Account Edit Form</h2>
+        <form th:action="@{/admin/account/edit/nauczyciel}" method="post" th:object="${konto_nauczyciela}">
+            <input type="text" th:field="*{id}" hidden readonly>
             <div class="row col-12 form-container">
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
                         <label for="username">Username:</label>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="text" id="username" th:name="username" th:value="${prev_user}">
+                        <input class="form-control" readonly type="text" id="username" th:field="*{username}">
                     </div>
                 </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="not_expired">Not Expired:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="not_expired" type="checkbox" th:field="*{accountNonLocked}">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="enabled">Enabled:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="enabled" type="checkbox" th:field="*{enabled}">
+                    </div>
+                </div>
+                <hr>
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
                         <label for="password">Password:</label>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="password" id="password" th:name="password">
+                        <input class="form-control" type="password" id="password" th:field="*{password}">
                     </div>
                 </div>
+                <input type="text" th:field="*{nauczyciel.id}" hidden readonly>
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
-                        <label for="confirmPassword">Confirm password:</label>
+                        <label for="username">Imie:</label>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="password" id="confirmPassword" th:name="confirmPassword">
-                    </div>
-                </div>
-                <div class="row col-md-12 form-input-row">
-                    <div class="col-md-6">
-                        <label for="imie">Imie:</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" type="text" id="imie" th:name="imie">
+                        <input class="form-control" type="text" id="imie" th:field="*{nauczyciel.imie}">
                     </div>
                 </div>
                 <div class="row col-md-12 form-input-row">
@@ -52,7 +60,7 @@
                         <label for="nazwisko">Nazwisko:</label>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="text" id="nazwisko" th:name="nazwisko">
+                        <input class="form-control" type="text" id="nazwisko" th:field="*{nauczyciel.nazwisko}">
                     </div>
                 </div>
                 <div class="row col-md-12 form-input-row">
@@ -60,16 +68,16 @@
                         <label for="email">Email:</label>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="text" id="email" th:name="email">
+                        <input class="form-control" type="text" id="email" th:field="*{nauczyciel.email}">
                     </div>
                 </div>
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
-                        <label for="data_urodzenia">Data Urodzenia:</label>
+                        <label for="przedmiot">Przedmiot:</label>
                     </div>
-                    <div class="col-md-6">
-                        <input class="col-md-6" type="date" id="data_urodzenia" th:name="data_urodzenia">
-                    </div>
+                    <select th:field="*{nauczyciel.przedmiot}" id="przedmiot">
+                        <option th:each="przed : ${przedmioty}" th:text="${przed}" th:value="${przed}"></option>
+                    </select>
                 </div>
                 <div class="row col-md-12 form-button-row">
                     <div class="col-md-6">
@@ -81,7 +89,6 @@
                 </div>
             </div>
         </form>
-        </hr>
     </div>
 </main>
 <th:block th:replace="fragments :: scripts" th:remove="tag"/>

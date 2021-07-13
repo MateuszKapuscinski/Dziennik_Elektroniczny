@@ -15,6 +15,5 @@ public class CreateTeacherAccountRequest {
     private String imie;
     private String nazwisko;
     private String email;
-
     private Przedmiot przedmiot;
 }

@@ -60,6 +60,38 @@
                         <input class="form-control" type="password" id="password" th:field="*{password}">
                     </div>
                 </div>
+<!--
+                <div class="col-md-6">
+                    <label for="username">Imie:</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="imie" th:name="imie">
+                </div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">
+                    <label for="nazwisko">Nazwisko:</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="nazwisko" th:name="nazwisko">
+                </div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">
+                    <label for="email">Email:</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="email" th:name="email">
+                </div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">
+                    <label for="przedmiot">Przedmiot:</label>
+                </div>
+                <select th:name="przedmiot" id="przedmiot">
+                    <option th:each="przed : ${przedmioty}" th:text="${przed}" th:value="${przed}"></option>
+                </select>
+            </div>-->
                 <div class="row col-md-12 form-button-row">
                     <div class="col-md-6">
                         <button type="reset" class="btn btn-warning offset-3 col-md-6">Reset</button>

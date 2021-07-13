@@ -2,14 +2,13 @@ package com.sda.jz75_security_template.controller;
 
 import com.sda.jz75_security_template.exception.InvalidRegisterData;
 import com.sda.jz75_security_template.model.Nauczyciel;
-import com.sda.jz75_security_template.model.PoziomKlasy;
 import com.sda.jz75_security_template.model.Przedmiot;
 import com.sda.jz75_security_template.model.account.Account;
 import com.sda.jz75_security_template.model.account.CreateTeacherAccountRequest;
 import com.sda.jz75_security_template.model.account.RolesDto;
-import com.sda.jz75_security_template.repository.NauczycielRepository;
 import com.sda.jz75_security_template.service.AccountService;
 import com.sda.jz75_security_template.service.NauczycielService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
 import static com.sda.jz75_security_template.configuration.DataInitializer.*;
@@ -86,6 +84,7 @@ public class AdminController {
             model.addAttribute("role_supervisor", isSupervisor);
             model.addAttribute("role_user", isUser);
             model.addAttribute("account_to_edit", accountOptional.get());
+
             return "admin-account-edit";
         }
         return "redirect:/accounts?error=Unable to delete account";
@@ -117,6 +116,29 @@ public class AdminController {
         return "register-teacher";
     }
 
+    @GetMapping("/account/edit/nauczyciel")
+    public String edycjaNauczyciela(Model model, @RequestParam(name = "id_nauczyciel") Long id) {
+        Optional<Nauczyciel> optionalNauczyciel = nauczycielService.zwrocNauczycielaPoId(id);
+        if (optionalNauczyciel.isPresent()) {
+            Nauczyciel nauczyciel = optionalNauczyciel.get();
+            Account account = nauczyciel.getAccount();
+            model.addAttribute("konto_nauczyciela", account);
+            model.addAttribute("przedmioty", Przedmiot.values());
+            log.info("Nauczyciel do edycji" + optionalNauczyciel);
+
+            return "teacher-account-edit";
+        }
+        return "redirect:/admin/accounts";
+    }
+
+    @PostMapping("/account/edit/nauczyciel")
+    public String edycjaNauczyciela(Account account) {
+        Nauczyciel daneNauczyciela = nauczycielService.aktualizujDaneNauczyciela(account.getNauczyciel().getId(), account.getNauczyciel());
+        accountService.aktualizujDaneKontaNauczyciela(account.getId(), account, daneNauczyciela);
+
+        return "redirect:/admin/accounts";
+    }
+/*
     @PostMapping("/add")
     public String dodawanieNauczyciela(Nauczyciel nauczyciel) {
         log.info("nauczyciel do zapisu" + nauczyciel);
@@ -133,20 +155,6 @@ public class AdminController {
         return "nauczyciel-add";
     }
 
-    @GetMapping("/edit")
-    public String edycjaNauczyciela(Model model,@RequestParam(name = "id_nauczyciel_do_edycji") Long id){
-        Optional<Nauczyciel> nauczycielEdytowany = nauczycielService.zwrocNauczycielaPoId(id);
-        if (nauczycielEdytowany.isPresent()){
-            log.info("Nauczyciel do edycji" + nauczycielEdytowany);
-            model.addAttribute("nowy_nauczyciel", nauczycielEdytowany.get());
-            model.addAttribute("lista_przedmiotow", Przedmiot.values());
-            model.addAttribute("lista_klas", PoziomKlasy.values());
-            return "nauczyciel-add";
-        }
-        // jeśli nie udało się znaleźć nauczyciela, to wracamy na listę nauczycieli
-        return "redirect:/lista/nauczycieli";
-    }
-
     @GetMapping("lista/nauczycieli")
     public String wyswietlaListeWszystkichNauczycieli(Model model) {
         List<Nauczyciel> nauczycielList = nauczycielService.zwrocWszystkich();
@@ -159,7 +167,7 @@ public class AdminController {
     public String usunNauczyciela(@RequestParam(name = "id") Long idTemp) {
         nauczycielService.usunNauczyciela(idTemp);
         return "redirect:/admin/lista/nauczycieli";
-    }
+    }*/
 
 /*    @GetMapping()
     public String wyswietlaListeNauczycieliPoPrzedmiotach(Model model) {

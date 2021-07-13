@@ -22,16 +22,19 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/authenticated}">Authenticated</a>
+                            <a class="nav-link" th:href="@{/authenticated}">Autoryzacja</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                             <a class="nav-link" th:href="@{/admin}">Admin</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasRole('SUPERVISOR')">
-                            <a class="nav-link" th:href="@{/teacher/register/student}">Register student</a>
+                            <a class="nav-link" th:href="@{/teacher/register/student}">Rejestracja ucznia</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasRole('SUPERVISOR')">
+                            <a class="nav-link" th:href="@{teacher/klasy}">Stwórz klase</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasRole('SUPERVISOR')">
+                            <a class="nav-link" th:href="@{teacher/oceny}">Dodaj oceny</a>
                         </li>
                     </ul>
                     <div  th:if="${username}" class="user-identity" th:text="${username}"></div>

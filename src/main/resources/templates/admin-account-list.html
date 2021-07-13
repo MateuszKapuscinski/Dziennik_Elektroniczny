@@ -32,10 +32,13 @@
                 <div class="col-2" th:text="${account.getUczen()}"></div>
                 <div class="col-3 row">
                     <a class="col-6" th:href="@{'/admin/account/delete/' + ${account.getId()}}">
-                        <button type="button" class="btn btn-danger col-12">Delete</button>
+                        <button type="button" class="btn btn-danger col-12">Usuń</button>
                     </a>
                     <a class="col-6" th:href="@{'/admin/account/edit/' + ${account.getId()}}">
-                        <button type="button" class="btn btn-info col-12">Edit</button>
+                        <button type="button" class="btn btn-info col-12">Edytuj konto</button>
+                    </a>
+                    <a th:if="${account.getNauczyciel() != null}" class="col-6" th:href="@{/admin/account/edit/nauczyciel(id_nauczyciel=${account.getNauczyciel().getId()})}">
+                        <button type="button" class="btn btn-info col-12">Edytuj dane</button>
                     </a>
                 </div>
             </div>

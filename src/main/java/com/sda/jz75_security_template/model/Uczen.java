@@ -28,7 +28,7 @@ public class Uczen {
 
     //lub string
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dataUrodzenia;
+    private LocalDate data_urodzenia;
 
     @OneToMany(mappedBy = "uczen",fetch = FetchType.LAZY)
     @ToString.Exclude

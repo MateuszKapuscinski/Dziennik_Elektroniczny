@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+    <div class="container marketing">
+        <hr>
+        <h2>Stwórz nową klase</h2>
+        <form th:action="@{/teacher/klasy}" method="post">
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">
+                    <label for="poziom_klasy">Poziom klasy:</label>
+                </div>
+                <select th:name="poziom_klasy" id="poziom_klasy">
+                    <option th:each="przed : ${poziom_klasy}" th:text="${przed}" th:value="${przed}"></option>
+                </select>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">
+                    <label for="rocznik">Rocznik:</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="number" min="2005" max="2020" id="rocznik" th:name="rocznik">
+                </div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">
+                    <label for="nazwa">Nazwa klasy:</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="nazwa" th:name="nazwa">
+                </div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">
+                    <label for="numer_sali">Numer sali:</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="numer_sali" th:name="numer_sali">
+                </div>
+                <div class="row col-md-12 form-button-row">
+                    <div class="col-md-6">
+                        <button type="reset" class="btn btn-warning offset-3 col-md-6">Reset</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary offset-3 col-md-6">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </hr>
+    </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

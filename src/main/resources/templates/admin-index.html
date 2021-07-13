@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Admin Index Page!</title>
+    <title>Witaj adminie!</title>
     <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
 </head>
 <body>
@@ -13,9 +13,7 @@
         <ul>
             <li>
                 <a th:href="@{/admin/register/teacher}">Rejestracja konta nauczyciela</a>
-                <a th:href="@{/admin/accounts}">Lista stworzonych kont</a>
-                <a th:href="@{/admin/add}">Stwórz nauczyciela</a>
-                <a th:href="@{/admin/lista/nauczycieli}">Lista nauczycieli</a>
+                <a th:href="@{/admin/accounts}">Lista kont</a>
             </li>
         </ul>
     </div>

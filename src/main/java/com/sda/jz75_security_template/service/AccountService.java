@@ -7,6 +7,7 @@ import com.sda.jz75_security_template.model.account.*;
 import com.sda.jz75_security_template.repository.AccountRepository;
 import com.sda.jz75_security_template.repository.AccountRoleRepository;
 import com.sda.jz75_security_template.repository.NauczycielRepository;
+import com.sda.jz75_security_template.repository.UczenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class AccountService {
     private final AccountRoleRepository accountRoleRepository;
     private final NauczycielRepository nauczycielRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UczenRepository uczenRepository;
 
     public List<Account> getAccountList() {
         return accountRepository.findAll();
@@ -127,6 +129,14 @@ public class AccountService {
             throw new InvalidRegisterData("Account with given username already exists!");
         }
 
+        Uczen uczen = uczenRepository.save(Uczen.builder()
+                .imie(request.getImie())
+                .nazwisko(request.getNazwisko())
+                .email(request.getEmail())
+                .data_urodzenia(request.getData_urodzenia())
+                .build());
+
+
         Account account = Account.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -135,9 +145,7 @@ public class AccountService {
                 .credentialsNonExpired(true)
                 .enabled(true)
                 .roles(new HashSet<>())
-//                .uczen(Uczen.builder()
-//                        .dataUrodzenia()
-//                        .build())
+                .uczen(uczen)
                 .build();
 
         checkAndUpdateRole(account, ROLE_USER, true);
