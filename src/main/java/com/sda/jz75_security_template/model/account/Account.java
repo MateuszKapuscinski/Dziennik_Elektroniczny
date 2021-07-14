@@ -34,6 +34,8 @@ public class Account implements UserDetails {
     private boolean enabled;
 
     @OneToOne(optional = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Nauczyciel nauczyciel;
 
     @OneToOne(optional = true)

@@ -28,4 +28,8 @@ public class Nauczyciel {
     @Enumerated(value = EnumType.STRING)
     private Przedmiot przedmiot;
 
+    @OneToOne(mappedBy = "nauczyciel", fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Account account;
 }

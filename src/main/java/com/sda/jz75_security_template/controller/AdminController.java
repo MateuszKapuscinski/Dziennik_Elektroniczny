@@ -45,9 +45,9 @@ public class AdminController {
 
     @ModelAttribute
     public void addAttributes(Model model, Principal principal) {
-        if(principal instanceof UsernamePasswordAuthenticationToken){
+        if (principal instanceof UsernamePasswordAuthenticationToken) {
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) principal;
-            if(usernamePasswordAuthenticationToken.getPrincipal() instanceof Account) {
+            if (usernamePasswordAuthenticationToken.getPrincipal() instanceof Account) {
                 Account account = (Account) usernamePasswordAuthenticationToken.getPrincipal();
                 model.addAttribute("username", account.getUsername());
             }
@@ -110,19 +110,19 @@ public class AdminController {
     }
 
     @GetMapping("/register/teacher")
-    public String getRegisterPage(Model model){
+    public String getRegisterPage(Model model) {
         model.addAttribute("przedmioty", Przedmiot.values());
         return "register-teacher";
     }
 
     @PostMapping("/register/teacher")
-    public String submitRegisterPage(Model model, CreateTeacherAccountRequest request){
-        try{
+    public String submitRegisterPage(Model model, CreateTeacherAccountRequest request) {
+        try {
             boolean success = accountService.registerTeacher(request);
-            if(success) {
+            if (success) {
                 return "redirect:/login";
             }
-        }catch (InvalidRegisterData ird){
+        } catch (InvalidRegisterData ird) {
             model.addAttribute("error_msg", ird.getMessage());
             model.addAttribute("prev_user", request.getUsername());
         }

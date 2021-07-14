@@ -51,4 +51,22 @@ public class NauczycielService {
     public List<Nauczyciel> zwrocWszystkich() {
         return nauczycielRepository.findAll();
     }
+
+    public Nauczyciel aktualizujDaneNauczyciela(Long id, Nauczyciel nauczyciel) {
+        // znaleźć nauczyciela
+        // edycja: imie, nazwisko, mail, przedmiot
+        // zapisać nauczyciela
+        Optional<Nauczyciel> optionalNauczyciel = nauczycielRepository.findById(id);
+        if (optionalNauczyciel.isPresent()){
+            Nauczyciel edytowany_nauczyciel = optionalNauczyciel.get();
+
+            edytowany_nauczyciel.setImie(nauczyciel.getImie());
+            edytowany_nauczyciel.setNazwisko(nauczyciel.getNazwisko());
+            edytowany_nauczyciel.setEmail(nauczyciel.getEmail());
+            edytowany_nauczyciel.setPrzedmiot(nauczyciel.getPrzedmiot());
+            return nauczycielRepository.save(edytowany_nauczyciel);
+        }
+        throw new UnsupportedOperationException("Coś poszło nietak!");
+        // zwracamy już edytowanego nauczyciela (metoda repository.save zwraca obiekt który ma być zwrócony)
+    }
 }

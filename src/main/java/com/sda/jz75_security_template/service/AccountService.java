@@ -162,4 +162,18 @@ public class AccountService {
         return true;
     }
 
+    public void aktualizujDaneKontaNauczyciela(Long id, Account account, Nauczyciel daneNauczyciela) {
+        Optional<Account> accountOptional = accountRepository.findById(id);
+        if (accountOptional.isPresent()) {
+            Account editedAccount = accountOptional.get();
+
+            editedAccount.setUsername(account.getUsername());
+            if(!account.getPassword().isEmpty()) {
+                editedAccount.setPassword(account.getPassword());
+            }
+
+            editedAccount.setNauczyciel(daneNauczyciela);
+            accountRepository.save(editedAccount);
+        }
+    }
 }
