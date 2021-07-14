@@ -10,8 +10,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -23,6 +25,10 @@ public class KlasaService {
 
     public Optional<Klasa> zwrocKlasePoId(Long klasaId){
         return klasaRepository.findById(klasaId);
+    }
+
+    public List<Klasa> zwrocListeKlas(){
+        return klasaRepository.findAll();
     }
 
     public void usunKlase(Long klasaId){

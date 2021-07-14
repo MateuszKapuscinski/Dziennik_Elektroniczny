@@ -9,6 +9,7 @@ import com.sda.jz75_security_template.model.account.RolesDto;
 import com.sda.jz75_security_template.service.AccountService;
 import com.sda.jz75_security_template.service.NauczycielService;
 
+import com.sda.jz75_security_template.service.UczenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,6 +36,7 @@ import static com.sda.jz75_security_template.configuration.DataInitializer.*;
 public class AdminController {
     private final AccountService accountService;
     private final NauczycielService nauczycielService;
+    private final UczenService uczenService;
 
     @GetMapping
     public String getIndex() {
@@ -59,10 +61,21 @@ public class AdminController {
         return "admin-account-list";
     }
 
-    @GetMapping("/account/delete/{accountId}")
-    public String deleteAccount(Model model, @PathVariable Long accountId, HttpServletRequest request) {
-        boolean success = accountService.deleteAccount(accountId);
-        if (success) {
+    @GetMapping("/account/delete/{account_id}/{nauczyciel_id}")
+    public String deleteAccount(@PathVariable Long account_id, HttpServletRequest request, @PathVariable Long nauczyciel_id) {
+        boolean success = accountService.deleteAccount(account_id);
+        boolean succes2 = nauczycielService.usunNauczycielaPoJegoId(nauczyciel_id);
+        if (success && succes2) {
+            return "redirect:" + request.getHeader("referer");
+        }
+        return "redirect:/accounts?error=Unable to delete account";
+    }
+
+    @GetMapping("/account/delete/uczen/{account_id}/{uczen_id}")
+    public String deleteAccountStudent(@PathVariable Long account_id, HttpServletRequest request, @PathVariable Long uczen_id) {
+        boolean success = accountService.deleteAccount(account_id);
+        boolean succes2 = uczenService.usunUczniaPoJegoId(uczen_id);
+        if (success && succes2) {
             return "redirect:" + request.getHeader("referer");
         }
         return "redirect:/accounts?error=Unable to delete account";
@@ -125,7 +138,6 @@ public class AdminController {
             model.addAttribute("konto_nauczyciela", account);
             model.addAttribute("przedmioty", Przedmiot.values());
             log.info("Nauczyciel do edycji" + optionalNauczyciel);
-
             return "teacher-account-edit";
         }
         return "redirect:/admin/accounts";
@@ -135,7 +147,6 @@ public class AdminController {
     public String edycjaNauczyciela(Account account) {
         Nauczyciel daneNauczyciela = nauczycielService.aktualizujDaneNauczyciela(account.getNauczyciel().getId(), account.getNauczyciel());
         accountService.aktualizujDaneKontaNauczyciela(account.getId(), account, daneNauczyciela);
-
         return "redirect:/admin/accounts";
     }
 /*

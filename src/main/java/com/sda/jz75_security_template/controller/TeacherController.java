@@ -17,6 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -58,7 +62,20 @@ public class TeacherController {
     @PostMapping("/klasy")
     public String tworzenieKlasyPost(Klasa klasa) {
         klasaService.dodajKlase(klasa);
-        return "redirect:/teacher";
+        return "redirect:/teacher/lista";
+    }
+
+    @GetMapping("/lista")
+    public String wyswietlKlasy(Model model) {
+        List<Klasa> listaKlas = klasaService.zwrocListeKlas();
+        model.addAttribute("lista_klas",listaKlas);
+        return "teacher-lista-klas";
+    }
+
+    @GetMapping("/usun/klasy")
+    public String usuwanieKlasy(@RequestParam(name = "id")Long id) {
+        klasaService.usunKlase(id);
+        return "redirect:/teacher/lista";
     }
 
 /*    @PostMapping("/klasy")

@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -9,9 +10,15 @@
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
     <div class="container marketing">
-        <h2>Dostęp publiczny</h2>
+        <h2>Witaj nauczycielu</h2>
+        <ul>
+            <li>
+                <a th:href="@{/teacher/klasa}">Stwórz klase</a>
+                <a th:href="@{/teacher/lista}">Lista klas</a>
+            </li>
+        </ul>
     </div>
 </main>
 <th:block th:replace="fragments :: scripts" th:remove="tag"/>
 </body>
-</html>
+</html>-->

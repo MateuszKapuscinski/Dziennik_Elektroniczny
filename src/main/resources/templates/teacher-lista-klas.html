@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello Admin Account List!</title>
+  <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+  <div class="container marketing">
+    <h2>Lista klas</h2>
+    <form th:action="@{/teacher/lista}" method="get">
+      <div th:if="${error_msg}" class="row col-8 form-container" th:text="${error_msg}">
+      </div>
+      <div class="row col-md-10">
+        <div class="row col-md-10 list-header-row">
+          <div class="col-2">Poziom Klasy</div>
+          <div class="col-2">Rocznik</div>
+          <div class="col-2">Nazwa</div>
+          <div class="col-2">Numer sali</div>
+
+
+          </div>
+      <div th:each="klasa : ${lista_klas}" class="row col-md-12 list-data-row">
+        <div class="col-2" th:text="${klasa.getPoziom_klasy()}">Poziom klasy</div>
+        <div class="col-2" th:text="${klasa.getRocznik()}">Rocznik</div>
+        <div class="col-2" th:text="${klasa.getNazwa()}">Nazwa</div>
+        <div class="col-2" th:text="${klasa.getNumer_sali()}">Numer sali</div>
+
+         <a class="col-1" th:href="@{/teacher/usun/klasy(id=${klasa.id})}">
+            <button type="button" class="btn btn-danger col-12">Usuń</button>
+          </a>
+          <!--
+          <a class="col-6" th:href="@{'/teacher/edytuj/klase' + ${klasa.getId()}}">
+            <button type="button" class="btn btn-info col-12">Edytuj konto</button>
+          </a>-->
+
+      </div>
+
+    </form>
+  </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

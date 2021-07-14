@@ -23,7 +23,7 @@ public class UczenService {
                 Objects.nonNull(uczen.getData_urodzenia());
     }
 
-    public void czyPoprawnyUczen(Uczen uczen) {
+    public void dodajUcznia(Uczen uczen) {
         if (!isValidUczen(uczen)) {
             return;
         }
@@ -46,5 +46,17 @@ public class UczenService {
             return uczenRepository.save(edytowanyUczen);
         }
         throw new UnsupportedOperationException("Coś poszło nietak!");
+    }
+
+    public boolean usunUczniaPoJegoId(Long id) {
+        if (uczenRepository.existsById(id)){
+            uczenRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public void usunUcznia(Long id){
+        uczenRepository.deleteById(id);
     }
 }

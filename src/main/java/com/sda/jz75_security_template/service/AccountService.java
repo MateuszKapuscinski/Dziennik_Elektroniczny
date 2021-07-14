@@ -40,6 +40,14 @@ public class AccountService {
         return false;
     }
 
+/*    public boolean deleteTeacherAccount(Long accountId, Long nauczycielId){
+        if (accountRepository.existsById(accountId)){
+            accountRepository.deleteById(accountId);
+            nauczycielRepository.deleteById(nauczycielId);
+        }
+        return false;
+    }*/
+
     public Optional<Account> findAccount(Long accountId) {
         return accountRepository.findById(accountId);
     }

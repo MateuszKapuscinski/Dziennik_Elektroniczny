@@ -41,9 +41,8 @@ public class NauczycielService {
     }
 
     public boolean usunNauczycielaPoJegoId(Long id) {
-        Optional<Nauczyciel> optionalNauczyciel = zwrocNauczycielaPoId(id);
-        if (optionalNauczyciel.isPresent()) {
-            usunNauczycielaPoJegoId(id);
+        if (nauczycielRepository.existsById(id)) {
+            nauczycielRepository.deleteById(id);
             return true;
         }
         return false;
