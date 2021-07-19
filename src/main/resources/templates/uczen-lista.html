@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Teacher Account List!</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+    <div class="container marketing">
+        <h2>Lista Uczniów</h2>
+        <form th:action="@{/teacher/oceny}" method="get">
+            <div th:if="${error_msg}" class="row col-14 form-container" th:text="${error_msg}">
+            </div>
+            <div class="row col-md-14">
+                <div class="row col-md-14 list-header-row">
+                    <!--          <div class="col-2">Klasa</div>-->
+                    <div class="col-2">Imie</div>
+                    <div class="col-2">Nazwisko</div>
+                    <div class="col-2">Data urodzenia</div>
+                    <div class="col-2">Email</div>
+
+
+                </div>
+                <div th:each="uczen : ${lista_uczniow}" class="row col-md-16 list-data-row">
+                    <!--<div class="col-2" th:text="${uczen.getKlasy()}"></div>-->
+                    <div class="col-2" th:text="${uczen.getImie()}"></div>
+                    <div class="col-2" th:text="${uczen.getNazwisko()}"></div>
+                    <div class="col-2" th:text="${uczen.getData_urodzenia()}"></div>
+                    <div class="col-2" th:text="${uczen.getEmail()}"></div>
+
+                    <a class="col-2" th:href="@{/teacher/szczegoly(id_ucznia=${uczen.id})}">
+                        <button type="button" class="btn btn-danger col-8">Szczegóły ucznia</button>
+                    </a>
+                </div>
+        </form>
+    </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

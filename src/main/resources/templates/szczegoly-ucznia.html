@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Teacher Account List!</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+    <div class="container marketing">
+        <h2>Szczegóły ucznia</h2>
+        <form th:action="@{/teacher/szczegoly}" method="get">
+            <div th:if="${error_msg}" class="row col-14 form-container" th:text="${error_msg}">
+            </div>
+            <div class="row col-md-14">
+                <div class="row col-md-8 list-header-row">
+                    <!--          <div class="col-2">Klasa</div>-->
+                    <div class="col-2">Przedmiot</div>
+                    <div class="col-2">Ocena</div>
+                    <div class="col-2">Dyplomy</div>
+                </div>
+
+                <div th:each="ocena : ${szczegoly_ucznia.getOceny()}" class="row col-md-10 list-data-row">
+                    <!--<div class="col-2" th:text="${uczen.getKlasy()}"></div>-->
+                    <div class="col-2" th:text="${ocena.getPrzedmiot()}"></div>
+                    <div class="col-2" th:text="${ocena.getOcena()}"></div>
+                    <div class="col-2" th:text="${ocena.getUczen().getDyplomy()}"></div>
+
+                <a class="col-4" th:href="@{/teacher/usun/ocene(ocenaId=${ocena.id}, uczenId=${szczegoly_ucznia.id})}">
+                    <button type="button" class="btn btn-danger col-4">Usuń ocene</button>
+                </a>
+                </div>
+            </div>
+            <a class="col-2" th:href="@{/teacher/dodaj/ocene(idUcznia=${szczegoly_ucznia.id})}">
+                <button type="button" class="btn btn-danger col-4">Dodaj ocene</button>
+            </a>
+        </form>
+    </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

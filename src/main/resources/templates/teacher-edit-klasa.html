@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Register Page</title>
+  <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+  <div class="container marketing">
+    <hr>
+    <h2>Edytuj klase</h2>
+    <form th:action="@{/teacher/edytuj}" method="post" th:object="${edytowana_klasa}">
+      <input type="number" th:value="${klasaId}" hidden name="klasaId" readonly>
+      <input th:field="*{wychowawca}" hidden readonly>
+      <select th:field="*{poziom_klasy}">
+        <option th:each="poziom_klasy : ${poziom_klasy}" th:text="${poziom_klasy}" th:value="${poziom_klasy}"/>
+      </select>
+      <input id="rocznik" th:type="number" min="2005" max="2020" value="2005" th:field="*{rocznik}">
+      <input id="nazwa" th:type="text" th:field="*{nazwa}">
+      <input id="numer_sali" th:type="number" min="1" max="50" value="1"  th:field="*{numer_sali}">
+      <input type="submit">
+    </form>
+    </hr>
+  </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

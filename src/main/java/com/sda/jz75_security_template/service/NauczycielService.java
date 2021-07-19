@@ -2,6 +2,8 @@ package com.sda.jz75_security_template.service;
 
 import com.sda.jz75_security_template.model.Nauczyciel;
 import com.sda.jz75_security_template.model.Przedmiot;
+import com.sda.jz75_security_template.model.account.Account;
+import com.sda.jz75_security_template.repository.AccountRepository;
 import com.sda.jz75_security_template.repository.NauczycielRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class NauczycielService {
     private final NauczycielRepository nauczycielRepository;
+    private final AccountRepository accountRepository;
+
+
+ /*   public List<Account> zwrocListeKontUczniow(Long id){
+        List<>
+        accountRepository.
+    }*/
+
 
     private boolean isValid(Nauczyciel nauczyciel) {
         return Objects.nonNull(nauczyciel) &&

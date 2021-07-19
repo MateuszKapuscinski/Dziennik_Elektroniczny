@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.sda.jz75_security_template.configuration.DataInitializer.*;
 

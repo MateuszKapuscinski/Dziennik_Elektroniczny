@@ -25,7 +25,8 @@
                     <label for="rocznik">Rocznik:</label>
                 </div>
                 <div class="col-md-6">
-                    <input class="form-control" type="number" min="2005" max="2020" id="rocznik" th:name="rocznik">
+                    <input class="form-control" value="2005" type="number" min="2005" max="2020" id="rocznik"
+                           th:name="rocznik">
                 </div>
             </div>
             <div class="row col-md-12 form-input-row">
@@ -42,6 +43,16 @@
                 </div>
                 <div class="col-md-6">
                     <input class="form-control" type="text" id="numer_sali" th:name="numer_sali">
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="nauczycielId">Nauczyciel:</label>
+                    </div>
+                    <select th:name="nauczycielId" id="nauczycielId">
+                        <option th:each="nauczyciel : ${wszyscyNauczyciele}"
+                                th:text="${nauczyciel.imie + ' ' + nauczyciel.nazwisko + ' => ' + nauczyciel.przedmiot }"
+                                th:value="${nauczyciel.id}"></option>
+                    </select>
                 </div>
                 <div class="row col-md-12 form-button-row">
                     <div class="col-md-6">

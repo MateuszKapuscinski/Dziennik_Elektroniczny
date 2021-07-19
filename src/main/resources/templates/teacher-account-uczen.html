@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Admin Account List!</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+    <div class="container marketing">
+        <h2>Uczeń List Page</h2>
+        <div th:if="${error_msg}" class="row col-md-12">
+            <div th:text="${error_msg}"></div>
+        </div>
+        <div class="row col-md-12">
+            <div class="row col-md-12 list-header-row">
+                <div class="col-1">Id</div>
+                <div class="col-2">Username</div>
+                <div class="col-6">Uczen</div>
+                <div class="col-3">
+
+                </div>
+            </div>
+            <div th:each="account : ${accounts}" class="row col-md-12 list-data-row">
+                <div class="col-1" th:text="${account.getId()}"></div>
+                <div class="col-2" th:text="${account.getUsername()}"></div>
+                <div class="col-6" th:text="${account.getUczen()}"></div>
+                <div class="col-3 row">
+                    <a th:if="${account.getUczen!= null}" class="col-6"
+                       th:href="@{'/admin/account/delete/uczen/'+${account.getId()} + '/' + ${account.getUczen().getId()}}">
+                        <button type="button" class="btn btn-danger col-12">Usuń</button>
+                    </a>
+                    <a class="col-6" th:href="@{'/admin/account/edit/' + ${account.getId()}}">
+                        <button type="button" class="btn btn-info col-12">Edytuj konto</button>
+                    </a>
+<!--                    <a th:if="${account.getNauczyciel() != null}" class="col-6"-->
+<!--                       th:href="@{/admin/account/edit/nauczyciel(id_nauczyciel=${account.getNauczyciel().getId()})}">-->
+<!--                        <button type="button" class="btn btn-info col-12">Edytuj dane</button>-->
+<!--                    </a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

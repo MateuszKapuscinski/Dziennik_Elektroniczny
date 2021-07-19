@@ -49,12 +49,9 @@ public class KlasaService {
                 Objects.nonNull(klasa.getRocznik());
     }
 
-    public void dodajNauczycielaDoKlasy(Long klasaId, Long nauczycielId){
+    public void dodajNauczycielaDoKlasy(Long nauczycielId, Klasa nowaKlasa){
         Optional<Nauczyciel> optionalNauczyciel = nauczycielRepository.findById(nauczycielId);
-        Optional<Klasa> klasaOptional = klasaRepository.findById(klasaId);
-
-        if (optionalNauczyciel.isPresent() && klasaOptional.isPresent()){
-            Klasa klasa = klasaOptional.get();
+        if (optionalNauczyciel.isPresent()){
             Nauczyciel nauczyciel = optionalNauczyciel.get();
 
             klasa.setWychowawca(nauczyciel);
@@ -76,4 +73,20 @@ public class KlasaService {
         }
         log.error("Nie udało się dodać ucznia.");
     }
+
+   public void aktualizujDaneKlasy(Long id, Klasa daneAktualizujące){
+        Optional<Klasa> optionalKlasa = klasaRepository.findById(id);
+        if (optionalKlasa.isPresent()) {
+            Klasa edytowanaKlasa = optionalKlasa.get();
+
+            edytowanaKlasa.setNazwa(daneAktualizujące.getNazwa());
+            edytowanaKlasa.setPoziom_klasy(daneAktualizujące.getPoziom_klasy());
+            edytowanaKlasa.setRocznik(daneAktualizujące.getRocznik());
+            edytowanaKlasa.setWychowawca(daneAktualizujące.getWychowawca());
+            edytowanaKlasa.setUczniowie(daneAktualizujące.getUczniowie());
+            edytowanaKlasa.setNumer_sali(daneAktualizujące.getNumer_sali());
+
+            klasaRepository.save(edytowanaKlasa);
+        }
+   }
 }

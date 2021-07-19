@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -32,6 +33,10 @@ public class UczenService {
 
     public Optional<Uczen> zwrocUczniaPoId(Long id) {
         return uczenRepository.findById(id);
+    }
+
+    public List<Uczen> zwrocWszystkichUczniow() {
+        return uczenRepository.findAll();
     }
 
     public Uczen aktualizujDaneNauczyciela(Long id, Uczen uczen) {
