@@ -65,6 +65,7 @@ public class TeacherController {
         model.addAttribute("dane_nauczyciela", nauczyciel);
         model.addAttribute("nowa_klasa", klasa);
         model.addAttribute("poziom_klasy", PoziomKlasy.values());
+        model.addAttribute("wszyscyNauczyciele", nauczycielService.zwrocWszystkich());
         return "teacher-dodaj-klase";
     }
 

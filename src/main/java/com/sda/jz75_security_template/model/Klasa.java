@@ -30,6 +30,7 @@ public class Klasa {
     @ManyToOne()
     @ToString.Exclude
     @JsonBackReference
+    @EqualsAndHashCode.Exclude
     private Nauczyciel wychowawca;
 
     @Enumerated(value = EnumType.STRING)

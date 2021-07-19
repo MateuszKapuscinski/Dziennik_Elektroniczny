@@ -57,7 +57,10 @@ public class AdminController {
 
     @GetMapping("/accounts")
     public String getAccounts(Model model, @RequestParam(required = false) String error) {
-        model.addAttribute("accounts", accountService.getAccountList());
+        model.addAttribute("accounts", accountService.getAccountList()
+                .stream().filter(account -> account.getUczen() == null)
+                .collect(Collectors.toList()));
+        // wysyłana jest lista wszystkich użytkowników którzy nie są uczniami
         model.addAttribute("error_msg", error);
         return "admin-account-list";
     }

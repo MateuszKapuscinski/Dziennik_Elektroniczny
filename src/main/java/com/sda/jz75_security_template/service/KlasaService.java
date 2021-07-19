@@ -35,18 +35,16 @@ public class KlasaService {
         klasaRepository.deleteById(klasaId);
     }
 
-    public void dodajKlase(Klasa klasa) {
+    public Klasa dodajKlase(Klasa klasa) {
         if (!isValid(klasa)){
-            return;
+            throw new UnsupportedOperationException("Klasa nie jest poprawna!");
         }
-        klasaRepository.save(klasa);
+        return klasaRepository.save(klasa);
     }
 
     public boolean isValid(Klasa klasa) {
         return Objects.nonNull(klasa.getNazwa()) &&
-                Objects.nonNull(klasa.getPoziom_klasy()) &&
-                Objects.nonNull(klasa.getNumer_sali()) &&
-                Objects.nonNull(klasa.getRocznik());
+                Objects.nonNull(klasa.getPoziom_klasy());
     }
 
     public void dodajNauczycielaDoKlasy(Long nauczycielId, Klasa nowaKlasa){
@@ -54,8 +52,8 @@ public class KlasaService {
         if (optionalNauczyciel.isPresent()){
             Nauczyciel nauczyciel = optionalNauczyciel.get();
 
-            klasa.setWychowawca(nauczyciel);
-            klasaRepository.save(klasa);
+            nowaKlasa.setWychowawca(nauczyciel);
+            klasaRepository.save(nowaKlasa);
         }
         log.error("Nie udało się dodać nauczyciela.");
     }

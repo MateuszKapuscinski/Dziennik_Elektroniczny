@@ -17,6 +17,8 @@ public class Nauczyciel {
     private Long id;
 
     @OneToMany(mappedBy = "wychowawca", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Klasa> klasy;
 
     private String imie;
