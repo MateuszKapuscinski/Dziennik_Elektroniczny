@@ -150,10 +150,7 @@ public class TeacherController {
 
     @GetMapping("/dodaj/ocene")
     public String dodajOcene(Model model, Long idUcznia) {
-        Ocena nowaOcena = new Ocena();
-        nowaOcena.setOcena(1);
-
-        model.addAttribute("nowa_ocena", nowaOcena);
+        model.addAttribute("nowa_ocena", new Ocena());
         model.addAttribute("oceny_z_przedmiotow", Przedmiot.values());
         model.addAttribute("uczenId", idUcznia);
         return "uczen-dodaj-ocena";
@@ -161,6 +158,7 @@ public class TeacherController {
 
     @PostMapping("/dodaj/ocene")
     public String dodajOcenePost(Ocena ocena, Long id_ucznia) {
+        log.info("Ocena przed dodaniem po odebraniu: " + ocena);
         ocenaService.dodajOceneDoUcznia(ocena, id_ucznia);
         return "redirect:/teacher/szczegoly?id_ucznia=" + id_ucznia;
     }
@@ -169,14 +167,14 @@ public class TeacherController {
     public String szczegolyUcznia(Model model, Long id_ucznia) {
         Optional<Uczen> uczenOptional = uczenService.zwrocUczniaPoId(id_ucznia);
         if (uczenOptional.isPresent()) {
-            model.addAttribute("szczegoly_ucznia",uczenOptional.get());
+            model.addAttribute("szczegoly_ucznia", uczenOptional.get());
             return "szczegoly-ucznia";
         }
         return "redirect:/teacher/uczniowie";
     }
 
     @GetMapping("/usun/ocene")
-    public String usuwanieOceny(Long ocenaId, Long uczenId){
+    public String usuwanieOceny(Long ocenaId, Long uczenId) {
         ocenaService.usunOcene(ocenaId);
         return "redirect:/teacher/szczegoly?id_ucznia=" + uczenId;
     }

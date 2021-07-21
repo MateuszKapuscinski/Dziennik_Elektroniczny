@@ -22,7 +22,7 @@ public class Ocena {
     @JsonBackReference
     private Uczen uczen;
 
-    private int ocena;
+    private int ocenaWartosc = 1;
 
     @Enumerated(value = EnumType.STRING)
     private Przedmiot przedmiot;

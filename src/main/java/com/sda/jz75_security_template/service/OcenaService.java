@@ -23,6 +23,7 @@ public class OcenaService {
             Uczen uczen = uczenOptional.get();
 
             ocena.setUczen(uczen);
+            log.info("Ocena przed dodaniem przed zapisem: " + ocena);
             ocenaRepository.save(ocena);
         }else {
             log.error("nie udało się dodać oceny");

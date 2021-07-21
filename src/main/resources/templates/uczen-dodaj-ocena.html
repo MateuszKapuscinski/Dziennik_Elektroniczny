@@ -12,8 +12,9 @@
         <hr>
         <h2>Dodaj ocene</h2>
         <form th:action="@{/teacher/dodaj/ocene}" method="post" th:object="${nowa_ocena}">
+            <input type="number" hidden th:field="*{id}" readonly>
             <input type="number" hidden th:value="${uczenId}"  name="id_ucznia" readonly>
-            <input type="number" min="1" max="6" step="1" th:field="*{ocena}">
+            <input type="number" min="1" max="6" step="1" th:field="*{ocenaWartosc}">
             <select th:field="*{przedmiot}">
                 <option th:each="przedmiot : ${oceny_z_przedmiotow}"
                         th:text="${przedmiot}"

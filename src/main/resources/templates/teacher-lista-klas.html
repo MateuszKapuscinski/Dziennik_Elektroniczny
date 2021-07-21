@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8">
-  <title>Hello Teacher!</title>
-  <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+    <meta charset="UTF-8">
+    <title>Hello Teacher!</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
 </head>
 <body>
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
-  <div class="container marketing">
-    <h2>Lista klas</h2>
-    <form th:action="@{/teacher/lista}" method="get">
-      <div th:if="${error_msg}" class="row col-12 form-container" th:text="${error_msg}">
-      </div>
-      <div class="row col-md-12">
-        <div class="row col-md-12 list-header-row">
-          <div class="col-2">Poziom Klasy</div>
-          <div class="col-2">Rocznik</div>
-          <div class="col-2">Nazwa</div>
-          <div class="col-2">Numer sali</div>
-          <div class="col-2">Wychowawca</div>
-          <div class="col-2">Uczniowie</div>
+    <div class="container marketing">
+        <h2>Lista klas</h2>
+        <form th:action="@{/teacher/lista}" method="get">
+            <div th:if="${error_msg}" class="row col-12 form-container" th:text="${error_msg}">
+            </div>
+            <div class="row col-md-12">
+                <div class="row col-md-12 list-header-row">
+                    <div class="col-1">Poziom Klasy</div>
+                    <div class="col-1">Rocznik</div>
+                    <div class="col-2">Nazwa</div>
+                    <div class="col-1">Numer sali</div>
+                    <div class="col-2">Wychowawca</div>
 
 
-          </div>
-      <div th:each="klasa : ${lista_klas}" class="row col-md-14 list-data-row">
-        <div class="col-2" th:text="${klasa.getPoziom_klasy()}"></div>
-        <div class="col-2" th:text="${klasa.getRocznik()}"></div>
-        <div class="col-2" th:text="${klasa.getNazwa()}"></div>
-        <div class="col-2" th:text="${klasa.getNumer_sali()}"></div>
-        <div class="col-2" th:text="${klasa.getWychowawca()}"></div>
-        <div class="col-2" th:text="${klasa.getUczniowie()}"></div>
-         <a class="col-1" th:href="@{/teacher/usun/klasy(id=${klasa.id})}">
-            <button type="button" class="btn btn-danger col-16">Usuń</button>
-          </a>
-        <a class="col-1" th:href="@{/teacher/edytuj(id_klasa=${klasa.id})}">
-          <button type="button" class="btn btn-danger col-16">Edytuj</button>
-        </a>
-          <!--
-          <a class="col-6" th:href="@{'/teacher/edytuj/klase' + ${klasa.getId()}}">
-            <button type="button" class="btn btn-info col-12">Edytuj konto</button>
-          </a>-->
+                </div>
+                <div th:each="klasa : ${lista_klas}" class="row col-md-14 list-data-row">
+                    <div class="col-1" th:text="${klasa.getPoziom_klasy()}"></div>
+                    <div class="col-1" th:text="${klasa.getRocznik()}"></div>
+                    <div class="col-2" th:text="${klasa.getNazwa()}"></div>
+                    <div class="col-1" th:text="${klasa.getNumer_sali()}"></div>
+                    <div class="col-2" th:text="${klasa.getWychowawca()}"></div>
+                    <a class="col-1" th:href="@{/teacher/usun/klasy(id=${klasa.id})}">
+                        <button type="button" class="btn btn-danger col-16">Usuń</button>
+                    </a>
+                    <a class="col-1" th:href="@{/teacher/edytuj(id_klasa=${klasa.id})}">
+                        <button type="button" class="btn btn-danger col-16">Edytuj</button>
+                    </a>
+                    <a class="col-1" th:href="@{'/klasa/szczegoly/' + ${klasa.id}}">
+                        <button type="button" class="btn btn-danger col-16">Szczegóły</button>
+                    </a>
+                    <!--
+                    <a class="col-6" th:href="@{'/teacher/edytuj/klase' + ${klasa.getId()}}">
+                      <button type="button" class="btn btn-info col-12">Edytuj konto</button>
+                    </a>-->
 
-      </div>
+                </div>
 
-    </form>
-  </div>
+        </form>
+    </div>
 </main>
 <th:block th:replace="fragments :: scripts" th:remove="tag"/>
 </body>

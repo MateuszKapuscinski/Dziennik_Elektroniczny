@@ -28,7 +28,7 @@ public class Dyplom {
     @JsonBackReference
     private Uczen uczen;
 
-    private Double sredniaOcen;
+    private Double sredniaOcen; // null
 
     private String opis;
 
