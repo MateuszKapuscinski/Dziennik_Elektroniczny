@@ -54,8 +54,10 @@ public class KlasaService {
 
             nowaKlasa.setWychowawca(nauczyciel);
             klasaRepository.save(nowaKlasa);
+        }else {
+
+            log.error("Nie udało się dodać nauczyciela.");
         }
-        log.error("Nie udało się dodać nauczyciela.");
     }
 
     public void dodajUczniaDoKlasy(Long klasaId, Long uczenId) {

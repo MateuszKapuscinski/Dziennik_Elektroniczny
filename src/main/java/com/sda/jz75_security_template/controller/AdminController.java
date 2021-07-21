@@ -75,44 +75,6 @@ public class AdminController {
         return "redirect:/accounts?error=Unable to delete account";
     }
 
-    @GetMapping("/account/delete/uczen/{account_id}/{uczen_id}")
-    public String deleteAccountStudent(@PathVariable Long account_id, HttpServletRequest request, @PathVariable Long uczen_id) {
-        boolean success = accountService.deleteAccount(account_id);
-        boolean succes2 = uczenService.usunUczniaPoJegoId(uczen_id);
-        if (success && succes2) {
-            return "redirect:" + request.getHeader("referer");
-        }
-        return "redirect:/accounts?error=Unable to delete account";
-    }
-
-    @GetMapping("/account/edit/{accountId}")
-    public String editAccount(Model model, @PathVariable Long accountId) {
-        Optional<Account> accountOptional = accountService.findAccount(accountId);
-        if (accountOptional.isPresent()) {
-            Account account = accountOptional.get();
-            boolean isUser = account.getRoles().stream()
-                    .anyMatch(grantedAuthority -> grantedAuthority.getName().equals(ROLE_USER));
-            boolean isSupervisor = account.getRoles().stream()
-                    .anyMatch(grantedAuthority -> grantedAuthority.getName().equals(ROLE_SUPERVISOR));
-            boolean isAdmin = account.getRoles().stream()
-                    .anyMatch(grantedAuthority -> grantedAuthority.getName().equals(ROLE_ADMIN));
-
-            model.addAttribute("role_admin", isAdmin);
-            model.addAttribute("role_supervisor", isSupervisor);
-            model.addAttribute("role_user", isUser);
-            model.addAttribute("account_to_edit", accountOptional.get());
-
-            return "admin-account-edit";
-        }
-        return "redirect:/accounts?error=Unable to delete account";
-    }
-
-    @PostMapping("/account/edit")
-    public String submitAccount(Account account, boolean admin, boolean supervisor, boolean user) {
-        accountService.updateAccount(account, new RolesDto(admin, supervisor, user));
-        return "redirect:/admin/accounts";
-    }
-
     @GetMapping("/register/teacher")
     public String getRegisterPage(Model model) {
         model.addAttribute("przedmioty", Przedmiot.values());

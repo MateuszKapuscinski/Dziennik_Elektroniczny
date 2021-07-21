@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodaj dyplom</title>
+  <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+  <div class="container marketing">
+    <hr>
+    <h2>Edytuj dyplom</h2>
+    <form th:action="@{/teacher/edytuj/dyplom}" method="post" th:object="${edytowany_dyplom}">
+      <input type="number" hidden th:value="${dyplomId}"  name="id_dyplom" readonly>
+      <input type="number" min="1.0" max="6.0" step="0.01" th:field="*{sredniaOcen}">
+      <input hidden readonly th:field="*{uczen}">
+      <select th:field="*{typWyroznienia}">
+        <option th:each="wyroznienie : ${edytowany_typWyroznienia}"
+                th:text="${wyroznienie}"
+                th:value="${wyroznienie}">
+        </option>
+      </select>
+      <input type="text" th:field="*{opis}">
+      <input type="submit">
+    </form>
+    </hr>
+  </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

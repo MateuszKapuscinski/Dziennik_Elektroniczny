@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Index Page!</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+    <div class="container marketing">
+        <h2>Szczegóły klasy</h2>
+        <div class="row col-12 form-container" th:object="${klasa}">
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Poziom Klasy:</div>
+                <div class="col-md-6" th:text="*{poziom_klasy}"></div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Nazwa:</div>
+                <div class="col-md-6" th:text="*{nazwa}"></div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Rocznik:</div>
+                <div class="col-md-6" th:text="*{rocznik}"></div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Numer Sali:</div>
+                <div class="col-md-6" th:text="*{numer_sali}"></div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Wychowawca:</div>
+                <div class="col-md-6" th:text="*{wychowawca}"></div>
+            </div>
+        </div>
+<!--        GUZIK DODAJ UCZNIA-->
+        <a class="col-2" th:href="@{/klasa/dodaj/uczniow(idKlasy=${klasa.id})}">
+            <button type="button" class="btn btn-danger col-4">Dodaj ucznia</button>
+        </a>
+        <div th:each="uczen : ${klasa.getUczniowie()}" class="row col-md-12 list-data-row">
+            <div class="col-2" th:text="${uczen.imie}"></div>
+            <div class="col-2" th:text="${uczen.nazwisko}"></div>
+            <div class="col-2" th:text="${uczen.email}"></div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

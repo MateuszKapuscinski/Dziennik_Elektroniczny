@@ -9,38 +9,86 @@
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
     <div class="container marketing">
-        <h2>Uczeń List Page</h2>
-        <div th:if="${error_msg}" class="row col-md-12">
-            <div th:text="${error_msg}"></div>
-        </div>
-        <div class="row col-md-12">
-            <div class="row col-md-12 list-header-row">
-                <div class="col-1">Id</div>
-                <div class="col-2">Username</div>
-                <div class="col-6">Uczen</div>
-                <div class="col-3">
-
+        <h2>Account Edit Form</h2>
+        <form th:action="@{/teacher/account/edit/uczen}" method="post" th:object="${konto_ucznia}">
+            <input type="text" th:field="*{id}" hidden readonly>
+            <div class="row col-12 form-container">
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="username">Username:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" readonly type="text" id="username" th:field="*{username}">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="not_expired">Not Expired:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="not_expired" type="checkbox" th:field="*{accountNonLocked}">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="enabled">Enabled:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="enabled" type="checkbox" th:field="*{enabled}">
+                    </div>
+                </div>
+                <hr>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="password" id="password" th:field="*{password}">
+                    </div>
+                </div>
+                <input type="text" th:field="*{uczen.id}" hidden readonly>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="username">Imie:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="imie" th:field="*{uczen.imie}">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="nazwisko">Nazwisko:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="nazwisko" th:field="*{uczen.nazwisko}">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" id="email" th:field="*{uczen.email}">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="data_urodzenia">Data Urodzenia:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="col-md-6" type="date" id="data_urodzenia" th:field="*{uczen.data_urodzenia}">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-button-row">
+                    <div class="col-md-6">
+                        <button type="reset" class="btn btn-warning offset-3 col-md-6">Reset</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary offset-3 col-md-6">Submit</button>
+                    </div>
                 </div>
             </div>
-            <div th:each="account : ${accounts}" class="row col-md-12 list-data-row">
-                <div class="col-1" th:text="${account.getId()}"></div>
-                <div class="col-2" th:text="${account.getUsername()}"></div>
-                <div class="col-6" th:text="${account.getUczen()}"></div>
-                <div class="col-3 row">
-                    <a th:if="${account.getUczen!= null}" class="col-6"
-                       th:href="@{'/admin/account/delete/uczen/'+${account.getId()} + '/' + ${account.getUczen().getId()}}">
-                        <button type="button" class="btn btn-danger col-12">Usuń</button>
-                    </a>
-                    <a class="col-6" th:href="@{'/admin/account/edit/' + ${account.getId()}}">
-                        <button type="button" class="btn btn-info col-12">Edytuj konto</button>
-                    </a>
-<!--                    <a th:if="${account.getNauczyciel() != null}" class="col-6"-->
-<!--                       th:href="@{/admin/account/edit/nauczyciel(id_nauczyciel=${account.getNauczyciel().getId()})}">-->
-<!--                        <button type="button" class="btn btn-info col-12">Edytuj dane</button>-->
-<!--                    </a>-->
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </main>
 <th:block th:replace="fragments :: scripts" th:remove="tag"/>

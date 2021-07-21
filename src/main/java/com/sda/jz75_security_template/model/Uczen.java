@@ -1,6 +1,7 @@
 package com.sda.jz75_security_template.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sda.jz75_security_template.model.account.Account;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -44,4 +45,9 @@ public class Uczen {
     @OneToMany(mappedBy = "uczen", fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     private Set<Ocena> oceny;
+
+    @OneToOne(mappedBy = "uczen", fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Account account;
 }

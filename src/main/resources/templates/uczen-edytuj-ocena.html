@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Register Page</title>
+  <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<main>
+  <div class="container marketing">
+    <hr>
+    <h2>Edytuj ocene</h2>
+    <form th:action="@{/teacher/edytuj/ocene}" method="post" th:object="${edytowana_ocena}">
+      <input type="number" hidden th:value="${ocenaId}"  name="id_oceny" readonly>
+      <input type="number" min="1" max="6" step="1" th:field="*{ocenaWartosc}">
+      <input hidden readonly th:field="*{uczen}">
+      <select th:field="*{przedmiot}">
+        <option th:each="przedmiot : ${edytowany_przedmiot}"
+                th:text="${przedmiot}"
+                th:value="${przedmiot}">
+        </option>
+      </select>
+      <input type="submit">
+    </form>
+    </hr>
+  </div>
+</main>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

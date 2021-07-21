@@ -36,15 +36,15 @@
                         <button type="button" class="btn btn-danger col-12">Usuń</button>
                     </a>
                     <a th:if="${account.getUczen!= null}" class="col-6"
-                       th:href="@{'/admin/account/delete/uczen/'+${account.getId()} + '/' + ${account.getUczen().getId()}}">
+                       th:href="@{'/teacher/account/delete/uczen/'+${account.getId()} + '/' + ${account.getUczen().getId()}}">
                         <button type="button" class="btn btn-danger col-12">Usuń</button>
                     </a>
-                    <a class="col-6" th:href="@{'/admin/account/edit/' + ${account.getId()}}">
+<!--                    <a class="col-6" th:href="@{'/admin/account/edit/' + ${account.getId()}}">
                         <button type="button" class="btn btn-info col-12">Edytuj konto</button>
-                    </a>
+                    </a>-->
                     <a th:if="${account.getNauczyciel() != null}" class="col-6"
                        th:href="@{/admin/account/edit/nauczyciel(id_nauczyciel=${account.getNauczyciel().getId()})}">
-                        <button type="button" class="btn btn-info col-12">Edytuj dane</button>
+                        <button type="button" class="btn btn-info col-12">Edytuj konto</button>
                     </a>
                 </div>
             </div>

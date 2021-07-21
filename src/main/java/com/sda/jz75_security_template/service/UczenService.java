@@ -1,20 +1,22 @@
 package com.sda.jz75_security_template.service;
 
+import com.sda.jz75_security_template.model.Klasa;
 import com.sda.jz75_security_template.model.Uczen;
+import com.sda.jz75_security_template.repository.KlasaRepository;
 import com.sda.jz75_security_template.repository.UczenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class UczenService {
     private final UczenRepository uczenRepository;
+    private final KlasaRepository klasaRepository;
+    private final KlasaService klasaService;
 
     public boolean isValidUczen(Uczen uczen) {
         return Objects.nonNull(uczen) &&
@@ -39,7 +41,7 @@ public class UczenService {
         return uczenRepository.findAll();
     }
 
-    public Uczen aktualizujDaneNauczyciela(Long id, Uczen uczen) {
+    public Uczen aktualizujDaneUcznia(Long id, Uczen uczen) {
         Optional<Uczen> uczenOptional = uczenRepository.findById(id);
         if (uczenOptional.isPresent()) {
             Uczen edytowanyUczen = uczenOptional.get();
@@ -63,5 +65,21 @@ public class UczenService {
 
     public void usunUcznia(Long id){
         uczenRepository.deleteById(id);
+    }
+
+    public List<Uczen> zwrocWszystkichUczniowSet() {
+        return uczenRepository.findAll();
+    }
+
+   public void dodajUczniaDoKlasy(Long id_ucznia, Long idKlasy) {
+        Optional<Klasa> optionalKlasa = klasaRepository.findById(idKlasy);
+        Optional<Uczen> optionalUczen = uczenRepository.findById(id_ucznia);
+        if (optionalKlasa.isPresent() && optionalUczen.isPresent()){
+            Klasa klasa = optionalKlasa.get();
+            Uczen uczen = optionalUczen.get();
+
+            uczen.getKlasy().add(klasa);
+            uczenRepository.save(uczen);
+        }
     }
 }

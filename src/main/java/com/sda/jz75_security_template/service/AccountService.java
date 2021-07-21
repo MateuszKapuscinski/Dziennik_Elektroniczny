@@ -176,4 +176,17 @@ public class AccountService {
             accountRepository.save(editedAccount);
         }
     }
+
+    public void aktualizujDaneKontaUcznia(Long id, Account account, Uczen daneUcznia){
+        Optional<Account> accountOptional = accountRepository.findById(id);
+        if (accountOptional.isPresent()){
+            Account editedAccount = accountOptional.get();
+            editedAccount.setUsername(account.getUsername());
+            if (!account.getPassword().isEmpty()){
+                editedAccount.setPassword(account.getPassword());
+            }
+            editedAccount.setUczen(daneUcznia);
+            accountRepository.save(editedAccount);
+        }
+    }
 }

@@ -9,33 +9,82 @@
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
     <div class="container marketing">
-        <h2>Szczegóły ucznia</h2>
-        <form th:action="@{/teacher/szczegoly}" method="get">
-            <div th:if="${error_msg}" class="row col-14 form-container" th:text="${error_msg}">
+        <h2>Szczegóły Ucznia</h2>
+        <div class="row col-12 form-container" th:object="${szczegoly_ucznia}">
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Imie:</div>
+                <div class="col-md-6" th:text="*{imie}"></div>
             </div>
-            <div class="row col-md-14">
-                <div class="row col-md-8 list-header-row">
-                    <!--          <div class="col-2">Klasa</div>-->
-                    <div class="col-2">Przedmiot</div>
-                    <div class="col-2">Ocena</div>
-                    <div class="col-2">Dyplomy</div>
-                </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Nazwisko:</div>
+                <div class="col-md-6" th:text="*{nazwisko}"></div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Email:</div>
+                <div class="col-md-6" th:text="*{email}"></div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Data urodzenia:</div>
+                <div class="col-md-6" th:text="*{data_urodzenia}"></div>
+            </div>
+        </div>
 
-                <div th:each="ocena : ${szczegoly_ucznia.getOceny()}" class="row col-md-10 list-data-row">
-                    <!--<div class="col-2" th:text="${uczen.getKlasy()}"></div>-->
-                    <div class="col-2" th:text="${ocena.getPrzedmiot()}"></div>
-                    <div class="col-2" th:text="${ocena.getOcena()}"></div>
-                    <div class="col-2" th:text="${ocena.getUczen().getDyplomy()}"></div>
-
-                <a class="col-4" th:href="@{/teacher/usun/ocene(ocenaId=${ocena.id}, uczenId=${szczegoly_ucznia.id})}">
-                    <button type="button" class="btn btn-danger col-4">Usuń ocene</button>
-                </a>
+        <a class="offset-8 col-2" th:href="@{/teacher/dodaj/ocene(idUcznia=${szczegoly_ucznia.id})}">
+            <button type="button" class="btn btn-danger col-4">Dodaj ocene</button>
+        </a>
+        <div class="row col-md-12 form-container">
+            <div class="row col-md-12 list-header-row">
+                <!--          <div class="col-2">Klasa</div>-->
+                <div class="col-3">Przedmiot</div>
+                <div class="col-3">Ocena</div>
+                <div class="col-6"></div>
+                <!--                    <div class="col-2">Dyplomy</div>-->
+            </div>
+            <div th:each="ocena : ${szczegoly_ucznia.getOceny()}" class="row col-md-12 list-data-row">
+                <!--<div class="col-2" th:text="${uczen.getKlasy()}"></div>-->
+                <div class="col-3" th:text="${ocena.getPrzedmiot()}"></div>
+                <div class="col-3" th:text="${ocena.getOcenaWartosc()}"></div>
+                <!--                    <div class="col-2" th:text="${ocena.getUczen().getDyplomy()}"></div>-->
+                <div class="col-6">
+                    <a class="offset-5 col-3"
+                       th:href="@{/teacher/usun/ocene(ocenaId=${ocena.id}, uczenId=${szczegoly_ucznia.id})}">
+                        <button type="button" class="btn btn-danger col-3">Usuń ocene</button>
+                    </a>
+                    <a class="col-3"
+                       th:href="@{/teacher/edytuj/ocene(ocena_id=${ocena.id}, uczenId=${szczegoly_ucznia.id})}">
+                        <button type="button"  class="btn btn-danger col-3">Edytuj ocene</button>
+                    </a>
                 </div>
             </div>
-            <a class="col-2" th:href="@{/teacher/dodaj/ocene(idUcznia=${szczegoly_ucznia.id})}">
-                <button type="button" class="btn btn-danger col-4">Dodaj ocene</button>
-            </a>
-        </form>
+        </div>
+
+        <a class="offset-8 col-2" th:href="@{/teacher/dodaj/dyplom(idUcznia=${szczegoly_ucznia.id})}">
+            <button type="button" class="btn btn-danger col-4">Dodaj dyplom</button>
+        </a>
+        <div class="row col-md-12 form-container">
+            <div class="row col-md-12 list-header-row">
+                <div class="col-3">Średnia ocen</div>
+                <div class="col-3">Typ wyróżnienia</div>
+                <div class="col-3">Opis</div>
+                <div class="col-3"></div>
+            </div>
+
+            <div th:each="dyplom : ${szczegoly_ucznia.getDyplomy()}" class="row col-md-12 list-data-row">
+                <div class="col-3" th:text="${dyplom.getSredniaOcen()}"></div>
+                <div class="col-3" th:text="${dyplom.getTypWyroznienia()}"></div>
+                <div class="col-3" th:text="${dyplom.getOpis()}"></div>
+                <div class="col-3">
+                    <a class="offset-5 col-3"
+                       th:href="@{/teacher/usun/dyplom(dyplomId=${dyplom.id}, uczenId=${szczegoly_ucznia.id})}">
+                        <button type="button" class="btn btn-danger col-3">Usuń dyplom</button>
+                    </a>
+                    <a class="col-3"
+                        th:href="@{/teacher/edytuj/dyplom(dyplom_id=${dyplom.id}, uczenId=${szczegoly_ucznia.id})}">
+                        <button type="button" class="btn btn-danger col-3">Edytuj dyplom</button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 <th:block th:replace="fragments :: scripts" th:remove="tag"/>
