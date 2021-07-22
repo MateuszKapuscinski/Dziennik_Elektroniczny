@@ -19,6 +19,7 @@ html {
 }
 
 .list-header-row{
+    animation-duration: 1s;
     background-color: #f0f0f0;
     border: 2px azure solid;
 }
@@ -31,7 +32,19 @@ html {
     background-color: #e0e0e0;
 }
 
+.list-data-row:nth-child(odd):hover{
+    background-color: #c0c0c0;
+}
+
+.list-data-row:nth-child(even):hover{
+    background-color: #d0d0d0;
+}
+
 .user-identity{
     font-style: normal;
     color: white;
+}
+
+.moj-wlasny-styl{
+    border: 1px solid black !important;
 }

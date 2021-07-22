@@ -15,29 +15,30 @@
             </div>
             <div class="row col-md-12">
                 <div class="row col-md-12 list-header-row">
-                    <div class="col-1">Poziom Klasy</div>
-                    <div class="col-1">Rocznik</div>
-                    <div class="col-2">Nazwa</div>
-                    <div class="col-1">Numer sali</div>
-                    <div class="col-2">Wychowawca</div>
-
-
+                    <div class="col-md-2">Poziom Klasy</div>
+                    <div class="col-md-1">Rocznik</div>
+                    <div class="col-md-1">Nazwa</div>
+                    <div class="col-md-1">Numer sali</div>
+                    <div class="col-md-3">Wychowawca</div>
+                    <div class="col-md-4"></div>
                 </div>
-                <div th:each="klasa : ${lista_klas}" class="row col-md-14 list-data-row">
-                    <div class="col-1" th:text="${klasa.getPoziom_klasy()}"></div>
-                    <div class="col-1" th:text="${klasa.getRocznik()}"></div>
-                    <div class="col-2" th:text="${klasa.getNazwa()}"></div>
-                    <div class="col-1" th:text="${klasa.getNumer_sali()}"></div>
-                    <div class="col-2" th:text="${klasa.getWychowawca()}"></div>
-                    <a class="col-1" th:href="@{/teacher/usun/klasy(id=${klasa.id})}">
-                        <button type="button" class="btn btn-danger col-16">Usuń</button>
-                    </a>
-                    <a class="col-1" th:href="@{/teacher/edytuj(id_klasa=${klasa.id})}">
-                        <button type="button" class="btn btn-danger col-16">Edytuj</button>
-                    </a>
-                    <a class="col-1" th:href="@{'/klasa/szczegoly/' + ${klasa.id}}">
-                        <button type="button" class="btn btn-danger col-16">Szczegóły</button>
-                    </a>
+                <div th:each="klasa : ${lista_klas}" class="row col-md-12 list-data-row">
+                    <div class="col-md-2" th:text="${klasa.getPoziom_klasy()}"></div>
+                    <div class="col-md-1" th:text="${klasa.getRocznik()}"></div>
+                    <div class="col-md-1" th:text="${klasa.getNazwa()}"></div>
+                    <div class="col-md-1" th:text="${klasa.getNumer_sali()}"></div>
+                    <div class="col-md-3" th:text="${klasa.wychowawca.imie + ' ' + klasa.wychowawca.nazwisko}"></div>
+                    <div class="col-md-4 row">
+                        <a class="col-4" th:href="@{/teacher/usun/klasy(id=${klasa.id})}">
+                            <button type="button" class="col-md-12 btn btn-danger moj-wlasny-styl">Usuń</button>
+                        </a>
+                        <a class="col-4" th:href="@{/teacher/edytuj(id_klasa=${klasa.id})}">
+                            <button type="button" class="col-md-12 btn btn-secondary">Edytuj</button>
+                        </a>
+                        <a class="col-4" th:href="@{'/klasa/szczegoly/' + ${klasa.id}}">
+                            <button type="button" class="col-md-12 btn btn-primary">Szczegóły</button>
+                        </a>
+                    </div>
                     <!--
                     <a class="col-6" th:href="@{'/teacher/edytuj/klase' + ${klasa.getId()}}">
                       <button type="button" class="btn btn-info col-12">Edytuj konto</button>
