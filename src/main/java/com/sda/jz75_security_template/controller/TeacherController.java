@@ -130,14 +130,15 @@ public class TeacherController {
             model.addAttribute("klasaId", id);
             model.addAttribute("edytowana_klasa", optionalKlasa.get());
             model.addAttribute("poziom_klasy", PoziomKlasy.values());
+            model.addAttribute("wszyscyNauczyciele", nauczycielService.zwrocWszystkich());
             return "teacher-edit-klasa";
         }
         return "redirect:/teacher/lista";
     }
 
     @PostMapping("/edytuj")
-    public String edytujKlasePost(Long klasaId, Klasa klasa) {
-        klasaService.aktualizujDaneKlasy(klasaId, klasa);
+    public String edytujKlasePost(Long klasaId, Klasa klasa, Long nauczycielId) {
+        klasaService.aktualizujDaneKlasy(klasaId, klasa,nauczycielId);
         return "redirect:/teacher/lista";
     }
 

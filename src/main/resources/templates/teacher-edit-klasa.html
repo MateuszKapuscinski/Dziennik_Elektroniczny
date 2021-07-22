@@ -20,6 +20,14 @@
       <input id="rocznik" th:type="number" min="2005" max="2020" value="2005" th:field="*{rocznik}">
       <input id="nazwa" th:type="text" th:field="*{nazwa}">
       <input id="numer_sali" th:type="number" min="1" max="50" value="1"  th:field="*{numer_sali}">
+      <div class="col-md-6">
+        <label for="nauczycielId">Nauczyciel:</label>
+      </div>
+      <select th:name="nauczycielId" id="nauczycielId">
+        <option th:each="nauczyciel : ${wszyscyNauczyciele}"
+                th:text="${nauczyciel.imie + ' ' + nauczyciel.nazwisko + ' => ' + nauczyciel.przedmiot }"
+                th:value="${nauczyciel.id}"></option>
+      </select>
       <input type="submit">
     </form>
     </hr>

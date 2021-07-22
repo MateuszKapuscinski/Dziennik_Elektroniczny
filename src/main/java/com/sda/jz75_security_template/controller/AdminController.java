@@ -58,7 +58,9 @@ public class AdminController {
     @GetMapping("/accounts")
     public String getAccounts(Model model, @RequestParam(required = false) String error) {
         model.addAttribute("accounts", accountService.getAccountList()
-                .stream().filter(account -> account.getUczen() == null)
+                .stream()
+                .filter(account -> account.getUczen() == null)
+                .filter(account -> account.getNauczyciel() != null)
                 .collect(Collectors.toList()));
         // wysyłana jest lista wszystkich użytkowników którzy nie są uczniami
         model.addAttribute("error_msg", error);
@@ -115,41 +117,5 @@ public class AdminController {
         accountService.aktualizujDaneKontaNauczyciela(account.getId(), account, daneNauczyciela);
         return "redirect:/admin/accounts";
     }
-/*
-    @PostMapping("/add")
-    public String dodawanieNauczyciela(Nauczyciel nauczyciel) {
-        log.info("nauczyciel do zapisu" + nauczyciel);
-        nauczycielService.dodajNauczyciela(nauczyciel);
-        return "redirect:/admin/add";
-    }
-
-    @GetMapping("/add")
-    public String dodawanieNauczycielGet(Model model) {
-        Nauczyciel nauczyciel = new Nauczyciel();
-        model.addAttribute("nowy_nauczyciel", nauczyciel);
-        model.addAttribute("lista_przedmiotow", Przedmiot.values());
-        model.addAttribute("lista_klas", PoziomKlasy.values());
-        return "nauczyciel-add";
-    }
-
-    @GetMapping("lista/nauczycieli")
-    public String wyswietlaListeWszystkichNauczycieli(Model model) {
-        List<Nauczyciel> nauczycielList = nauczycielService.zwrocWszystkich();
-
-        model.addAttribute("lista_nauczycieli",nauczycielList);
-        return "lista-nauczycieli";
-    }
-
-    @GetMapping("/usun")
-    public String usunNauczyciela(@RequestParam(name = "id") Long idTemp) {
-        nauczycielService.usunNauczyciela(idTemp);
-        return "redirect:/admin/lista/nauczycieli";
-    }*/
-
-/*    @GetMapping()
-    public String wyswietlaListeNauczycieliPoPrzedmiotach(Model model) {
-        List<Nauczyciel> nauczycielList = nauczycielService.wyszukajNauczycieliPoPrzedmiocie();
-
-    }*/
 
 }

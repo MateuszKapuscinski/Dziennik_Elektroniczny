@@ -10,12 +10,12 @@
 <main>
     <div class="container marketing">
         <hr>
-        <h2>Authenticate:</h2>
+        <h2>Logowanie:</h2>
         <form th:action="@{/login}" method="post">
             <div class="row col-12 form-container">
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
-                        <label for="username">Username:</label>
+                        <label for="username">Login:</label>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="text" id="username" th:name="username">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
-                        <label for="password">Password:</label>
+                        <label for="password">Hasło:</label>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="password" id="password" th:name="password">

@@ -169,7 +169,7 @@ public class AccountService {
 
             editedAccount.setUsername(account.getUsername());
             if(!account.getPassword().isEmpty()) {
-                editedAccount.setPassword(account.getPassword());
+                editedAccount.setPassword(passwordEncoder.encode(account.getPassword()));
             }
 
             editedAccount.setNauczyciel(daneNauczyciela);

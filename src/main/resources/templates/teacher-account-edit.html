@@ -2,20 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Admin Account List!</title>
+    <title>Hello Admin</title>
     <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
 </head>
 <body>
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
     <div class="container marketing">
-        <h2>Account Edit Form</h2>
+        <h2>Edycja konta nauczyciela</h2>
         <form th:action="@{/admin/account/edit/nauczyciel}" method="post" th:object="${konto_nauczyciela}">
             <input type="text" th:field="*{id}" hidden readonly>
             <div class="row col-12 form-container">
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
-                        <label for="username">Username:</label>
+                        <label for="username">Login:</label>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" readonly type="text" id="username" th:field="*{username}">
@@ -23,15 +23,23 @@
                 </div>
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
-                        <label for="not_expired">Not Expired:</label>
+                        <label for="not_expired">Nieprzedawniony:</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="not_expired" type="checkbox" th:field="*{accountNonLocked}">
+                        <input id="not_expired" type="checkbox" th:field="*{accountNonExpired}">
                     </div>
                 </div>
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
-                        <label for="enabled">Enabled:</label>
+                        <label for="not_expired">Niezablokowany:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="not_locked" type="checkbox" th:field="*{accountNonLocked}">
+                    </div>
+                </div>
+                <div class="row col-md-12 form-input-row">
+                    <div class="col-md-6">
+                        <label for="enabled">Aktywny:</label>
                     </div>
                     <div class="col-md-6">
                         <input id="enabled" type="checkbox" th:field="*{enabled}">
@@ -40,7 +48,7 @@
                 <hr>
                 <div class="row col-md-12 form-input-row">
                     <div class="col-md-6">
-                        <label for="password">Password:</label>
+                        <label for="password">Hasło:</label>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="password" id="password" th:field="*{password}">

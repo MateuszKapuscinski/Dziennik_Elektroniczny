@@ -9,31 +9,27 @@
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
     <div class="container marketing">
-        <h2>Authenticated</h2>
+        <h2>Autoryzowany</h2>
         <div class="row col-12 form-container" th:object="${uzytkownik}">
             <div class="row col-md-12 form-input-row">
-                <div class="col-md-6">Username:</div>
+                <div class="col-md-6">Login:</div>
                 <div class="col-md-6" th:text="*{username}"></div>
             </div>
             <div class="row col-md-12 form-input-row">
-                <div class="col-md-6">Roles:</div>
+                <div class="col-md-6">Rola:</div>
                 <div class="col-md-6" th:text="*{roles}"></div>
             </div>
             <div class="row col-md-12 form-input-row">
-                <div class="col-md-6">Non Expired:</div>
+                <div class="col-md-6">Nieprzedawniony:</div>
                 <div class="col-md-6" th:text="*{accountNonExpired}"></div>
             </div>
             <div class="row col-md-12 form-input-row">
-                <div class="col-md-6">Non Locked:</div>
+                <div class="col-md-6">Niezablokowany:</div>
                 <div class="col-md-6" th:text="*{accountNonLocked}"></div>
             </div>
             <div class="row col-md-12 form-input-row">
-                <div class="col-md-6">Enabled:</div>
+                <div class="col-md-6">Aktywny:</div>
                 <div class="col-md-6" th:text="*{enabled}"></div>
-            </div>
-            <div class="row col-md-12 form-input-row">
-                <div class="col-md-6">Dog Names:</div>
-                <div class="col-md-6" th:text="${favouriteDogNamesList}"></div>
             </div>
         </div>
     </div>

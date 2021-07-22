@@ -74,17 +74,19 @@ public class KlasaService {
         log.error("Nie udało się dodać ucznia.");
     }
 
-   public void aktualizujDaneKlasy(Long id, Klasa daneAktualizujące){
-        Optional<Klasa> optionalKlasa = klasaRepository.findById(id);
-        if (optionalKlasa.isPresent()) {
+   public void aktualizujDaneKlasy(Long klasaId, Klasa daneAktualizujące, Long nauczycielId){
+        Optional<Klasa> optionalKlasa = klasaRepository.findById(klasaId);
+        Optional<Nauczyciel> optionalNauczyciel = nauczycielRepository.findById(nauczycielId);
+        if (optionalKlasa.isPresent() && optionalNauczyciel.isPresent()) {
             Klasa edytowanaKlasa = optionalKlasa.get();
+            Nauczyciel edytowanyNauczyciel = optionalNauczyciel.get();
 
             edytowanaKlasa.setNazwa(daneAktualizujące.getNazwa());
             edytowanaKlasa.setPoziom_klasy(daneAktualizujące.getPoziom_klasy());
             edytowanaKlasa.setRocznik(daneAktualizujące.getRocznik());
-            edytowanaKlasa.setWychowawca(daneAktualizujące.getWychowawca());
             edytowanaKlasa.setUczniowie(daneAktualizujące.getUczniowie());
             edytowanaKlasa.setNumer_sali(daneAktualizujące.getNumer_sali());
+            edytowanaKlasa.setWychowawca(edytowanyNauczyciel);
 
             klasaRepository.save(edytowanaKlasa);
         }

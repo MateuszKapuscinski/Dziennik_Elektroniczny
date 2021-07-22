@@ -25,7 +25,7 @@
       <div th:each="account : ${accounts}" class="row col-md-12 list-data-row">
         <div class="col-1" th:text="${account.getId()}"></div>
         <div class="col-2" th:text="${account.getUsername()}"></div>
-        <div class="col-6" th:text="${account.getUczen()}"></div>
+        <div class="col-6" th:text="${account.getUczen.imie+' '+account.getUczen().nazwisko + ', email:' + account.getUczen().email+ ', data urodzenia ' + account.getUczen().data_urodzenia}"></div>
         <div class="col-3 row">
           <a th:if="${account.getUczen!= null}" class="col-6"
              th:href="@{'/teacher/account/delete/uczen/'+${account.getId()} + '/' + ${account.getUczen().getId()}}">

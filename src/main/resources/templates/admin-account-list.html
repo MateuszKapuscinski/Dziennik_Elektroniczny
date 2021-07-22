@@ -2,37 +2,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Admin Account List!</title>
+    <title>Hello Admin</title>
     <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
 </head>
 <body>
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
     <div class="container marketing">
-        <h2>Admin Account List Page</h2>
+        <h2>Lista kont nauczycieli</h2>
         <div th:if="${error_msg}" class="row col-md-12">
             <div th:text="${error_msg}"></div>
         </div>
         <div class="row col-md-12">
             <div class="row col-md-12 list-header-row">
                 <div class="col-1">Id</div>
-                <div class="col-2">Username</div>
-                <div class="col-2">Roles</div>
-                <div class="col-2">Nauczyciel</div>
-                <div class="col-2">Uczen</div>
+                <div class="col-2">Login</div>
+                <div class="col-2">Rola</div>
+                <div class="col-4">Nauczyciel</div>
                 <div class="col-3">
 
                 </div>
             </div>
-            <div th:each="account : ${accounts}" class="row col-md-12 list-data-row">
+            <div th:each="account : ${accounts}" class="row col-md-14 list-data-row">
                 <div class="col-1" th:text="${account.getId()}"></div>
                 <div class="col-2" th:text="${account.getUsername()}"></div>
                 <div class="col-2" th:text="${account.getAuthorities()}"></div>
-                <div class="col-2" th:text="${account.getNauczyciel()}"></div>
-                <div class="col-2" th:text="${account.getUczen()}"></div>
+                <div class="col-4" th:text="${account.nauczyciel.imie+' '+account.nauczyciel.nazwisko+
+                ', email: '+ account.nauczyciel.email+
+                ', przedmiot: '+account.nauczyciel.przedmiot}"></div>
                 <div class="col-3 row">
                     <a th:if="${account.getNauczyciel!= null}" class="col-6"
-                       th:href="@{'/admin/account/delete/'+${account.getId()} + '/' + ${account.getNauczyciel().getId()}}">
+                       th:href="@{'/admin/account/delete/'+${account.getId()} + '/' + ${account.nauczyciel.getId()}}">
                         <button type="button" class="btn btn-danger col-12">Usuń</button>
                     </a>
                     <a th:if="${account.getUczen!= null}" class="col-6"
@@ -43,7 +43,7 @@
                         <button type="button" class="btn btn-info col-12">Edytuj konto</button>
                     </a>-->
                     <a th:if="${account.getNauczyciel() != null}" class="col-6"
-                       th:href="@{/admin/account/edit/nauczyciel(id_nauczyciel=${account.getNauczyciel().getId()})}">
+                       th:href="@{/admin/account/edit/nauczyciel(id_nauczyciel=${account.nauczyciel.getId()})}">
                         <button type="button" class="btn btn-info col-12">Edytuj konto</button>
                     </a>
                 </div>
