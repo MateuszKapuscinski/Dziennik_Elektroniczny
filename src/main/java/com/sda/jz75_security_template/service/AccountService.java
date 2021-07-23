@@ -169,6 +169,7 @@ public class AccountService {
 
             editedAccount.setUsername(account.getUsername());
             if(!account.getPassword().isEmpty()) {
+                //tutaj
                 editedAccount.setPassword(passwordEncoder.encode(account.getPassword()));
             }
 
@@ -183,7 +184,7 @@ public class AccountService {
             Account editedAccount = accountOptional.get();
             editedAccount.setUsername(account.getUsername());
             if (!account.getPassword().isEmpty()){
-                editedAccount.setPassword(account.getPassword());
+                editedAccount.setPassword(passwordEncoder.encode(account.getPassword()));
             }
             editedAccount.setUczen(daneUcznia);
             accountRepository.save(editedAccount);

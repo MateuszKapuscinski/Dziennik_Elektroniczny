@@ -28,7 +28,6 @@ public class ClassControler {
     @GetMapping("/szczegoly/{id}")
     public String classDetails(Model model, @PathVariable Long id) {
         Optional<Klasa> optionalKlasa = klasaService.zwrocKlasePoId(id);
-        //todo: if... wyciagnac obiekt..
         if (optionalKlasa.isPresent()) {
             model.addAttribute("klasa", optionalKlasa.get());
             return "szczegoly-klasy";

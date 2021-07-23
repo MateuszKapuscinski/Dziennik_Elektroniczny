@@ -33,10 +33,14 @@ public class UczenService {
         uczenRepository.save(uczen);
     }
 
-    public Optional<Uczen> zwrocUczniaPoId(Long id) {
-        return uczenRepository.findById(id);
+    public Optional<Uczen> zwrocUczniaPoId(Long idUcznia) {
+        return uczenRepository.findById(idUcznia);
     }
 
+/*    public Optional<Uczen> zwrocUczniaPoIdWRazZKontem(Long id,Long accountId) {
+
+        return uczenRepository.findById(id);
+    }*/
     public List<Uczen> zwrocWszystkichUczniow() {
         return uczenRepository.findAll();
     }
