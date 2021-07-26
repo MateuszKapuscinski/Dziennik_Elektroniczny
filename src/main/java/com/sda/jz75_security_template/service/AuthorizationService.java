@@ -3,11 +3,13 @@ package com.sda.jz75_security_template.service;
 import com.sda.jz75_security_template.model.account.Account;
 import com.sda.jz75_security_template.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Service
@@ -24,5 +26,17 @@ public class AuthorizationService implements UserDetailsService {
             return optionalAccount.get();
         }
         throw new UsernameNotFoundException("Can't find " + username);
+    }
+
+    public static Account getCurrentUserAccount(Principal principal) {
+        if (principal instanceof UsernamePasswordAuthenticationToken) {
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) principal;
+            if (usernamePasswordAuthenticationToken.getPrincipal() instanceof Account) {
+                Account account = (Account) usernamePasswordAuthenticationToken.getPrincipal();
+
+                return account;
+            }
+        }
+        throw new UnsupportedOperationException("Not logged in?");
     }
 }

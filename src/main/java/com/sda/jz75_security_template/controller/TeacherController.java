@@ -138,7 +138,7 @@ public class TeacherController {
 
     @PostMapping("/edytuj")
     public String edytujKlasePost(Long klasaId, Klasa klasa, Long nauczycielId) {
-        klasaService.aktualizujDaneKlasy(klasaId, klasa,nauczycielId);
+        klasaService.aktualizujDaneKlasy(klasaId, klasa, nauczycielId);
         return "redirect:/teacher/lista";
     }
 
@@ -200,41 +200,45 @@ public class TeacherController {
     }
 
     @GetMapping("/dodaj/dyplom")
-    public String dodajDyplom(Model model,Long idUcznia){
-        model.addAttribute("nowy_dyplom", new Dyplom());
+    public String dodajDyplom(Model model, Long idUcznia) {
+        double srednia = uczenService.sredniaUcznia(idUcznia);
+        Dyplom dyplom = new Dyplom();
+        dyplom.setSredniaOcen(Double.parseDouble(String.format("%.2f", srednia).replaceAll(",", ".")));
+
+        model.addAttribute("nowy_dyplom", dyplom);
         model.addAttribute("typ_wyroznienia", TypWyroznienia.values());
-        model.addAttribute("uczenId",idUcznia);
+        model.addAttribute("uczenId", idUcznia);
         return "uczen-dodaj-dyplom";
     }
 
     @PostMapping("/dodaj/dyplom")
-    public String dodajDyplomPost(Dyplom dyplom,Long id_ucznia){
-        dyplomService.dodajDyplomDoUcznia(dyplom,id_ucznia);
+    public String dodajDyplomPost(Dyplom dyplom, Long id_ucznia) {
+        dyplomService.dodajDyplomDoUcznia(dyplom, id_ucznia);
         return "redirect:/teacher/szczegoly?id_ucznia=" + id_ucznia;
     }
 
     @GetMapping("/usun/dyplom")
-    public String usuwanieDyplomu(Long dyplomId, Long uczenId){
+    public String usuwanieDyplomu(Long dyplomId, Long uczenId) {
         dyplomService.usunDyplom(dyplomId);
         return "redirect:/teacher/szczegoly?id_ucznia=" + uczenId;
     }
 
     @GetMapping("/edytuj/dyplom")
-    public String edytujDyplom(Model model, @RequestParam(name = "dyplom_id") Long dyplom_id, Long id_ucznia){
+    public String edytujDyplom(Model model, @RequestParam(name = "dyplom_id") Long dyplom_id, Long id_ucznia) {
         Optional<Dyplom> optionalDyplom = dyplomService.zwrocDyplomPoId(dyplom_id);
-        if (optionalDyplom.isPresent()){
-            model.addAttribute("dyplomId",dyplom_id);
+        if (optionalDyplom.isPresent()) {
+            model.addAttribute("dyplomId", dyplom_id);
             model.addAttribute("edytowany_dyplom", optionalDyplom.get());
             model.addAttribute("edytowany_typWyroznienia", TypWyroznienia.values());
-            model.addAttribute("uczenId",id_ucznia);
+            model.addAttribute("uczenId", id_ucznia);
             return "uczen-edytuj-dyplom";
         }
         return "redirect:/teacher/szczegoly?id_ucznia=" + id_ucznia;
     }
 
     @PostMapping("edytuj/dyplom")
-    public String edytujDyplomPost(Long id_dyplom, Dyplom edytowanyDyplom){
-        dyplomService.aktualizujDyplom(id_dyplom,edytowanyDyplom);
+    public String edytujDyplomPost(Long id_dyplom, Dyplom edytowanyDyplom) {
+        dyplomService.aktualizujDyplom(id_dyplom, edytowanyDyplom);
         return "redirect:/teacher/szczegoly?id_ucznia=" + edytowanyDyplom.getUczen().getId();
     }
 }

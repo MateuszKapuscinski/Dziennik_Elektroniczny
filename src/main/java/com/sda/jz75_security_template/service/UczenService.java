@@ -1,8 +1,12 @@
 package com.sda.jz75_security_template.service;
 
+import com.sda.jz75_security_template.model.Dyplom;
 import com.sda.jz75_security_template.model.Klasa;
+import com.sda.jz75_security_template.model.Ocena;
 import com.sda.jz75_security_template.model.Uczen;
+import com.sda.jz75_security_template.repository.DyplomRepository;
 import com.sda.jz75_security_template.repository.KlasaRepository;
+import com.sda.jz75_security_template.repository.OcenaRepository;
 import com.sda.jz75_security_template.repository.UczenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +20,34 @@ import java.util.*;
 public class UczenService {
     private final UczenRepository uczenRepository;
     private final KlasaRepository klasaRepository;
+    private final DyplomRepository dyplomRepository;
+    private final OcenaRepository ocenaRepository;
     private final KlasaService klasaService;
+
+    public List<Klasa> pobierzKlasyUcznia(Uczen uczen){
+        return klasaRepository.findAllByUczniowieContaining(uczen);
+    }
+
+    public List<Dyplom> pobierzDyplomyUcznia(Uczen uczen){
+        return dyplomRepository.findAllByUczen(uczen);
+    }
+
+    public List<Ocena> pobierzOcenyUcznia(Uczen uczen){
+        return ocenaRepository.findAllByUczen(uczen);
+    }
+
+    public double sredniaUcznia(Long id){
+        Optional<Uczen> uczenOptional = zwrocUczniaPoId(id);
+        if(uczenOptional.isPresent()) {
+            OptionalDouble srednia = pobierzOcenyUcznia(uczenOptional.get())
+                    .stream()
+                    .mapToDouble(Ocena::getOcenaWartosc)
+                    .average();
+
+            return srednia.isPresent() ? srednia.getAsDouble() : 0.0;
+        }
+        throw new UnsupportedOperationException("Brak ucznia o danym id");
+    }
 
     public boolean isValidUczen(Uczen uczen) {
         return Objects.nonNull(uczen) &&

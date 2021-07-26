@@ -3,6 +3,7 @@ package com.sda.jz75_security_template.service;
 import com.sda.jz75_security_template.model.Klasa;
 import com.sda.jz75_security_template.model.Nauczyciel;
 import com.sda.jz75_security_template.model.Uczen;
+import com.sda.jz75_security_template.repository.DyplomRepository;
 import com.sda.jz75_security_template.repository.KlasaRepository;
 import com.sda.jz75_security_template.repository.NauczycielRepository;
 import com.sda.jz75_security_template.repository.UczenRepository;

@@ -46,7 +46,7 @@ public class Uczen {
     @EqualsAndHashCode.Exclude
     private Set<Ocena> oceny;
 
-    @OneToOne(mappedBy = "uczen", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "uczen", fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Account account;

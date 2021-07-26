@@ -38,7 +38,7 @@ public class Account implements UserDetails {
     @EqualsAndHashCode.Exclude
     private Nauczyciel nauczyciel;
 
-    @OneToOne(optional = true)
+    @OneToOne(optional = true, fetch = FetchType.EAGER)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Uczen uczen;
