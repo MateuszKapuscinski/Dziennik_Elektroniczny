@@ -45,6 +45,18 @@ html {
     color: white;
 }
 
-.moj-wlasny-styl{
+.guzik-usun{
     border: 1px solid black !important;
+}
+.guzik-edytuj{
+    border: 1px solid black !important;
+}
+.guzik-szczegoly{
+    border: 1px solid black !important;
+}
+.guzik-dodaj{
+
+}
+.kreska{
+    border-top: solid 1px #000;
 }

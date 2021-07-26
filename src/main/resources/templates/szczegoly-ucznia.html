@@ -29,8 +29,8 @@
             </div>
         </div>
 
-        <a class="offset-8 col-2" th:href="@{/teacher/dodaj/ocene(idUcznia=${szczegoly_ucznia.id})}">
-            <button type="button" class="btn btn-danger col-4">Dodaj ocene</button>
+        <a class="offset-10 col-2" th:href="@{/teacher/dodaj/ocene(idUcznia=${szczegoly_ucznia.id})}">
+            <button type="button" class="btn btn-success guzik-dodaj col-2">Dodaj ocene</button>
         </a>
         <div class="row col-md-12 form-container">
             <div class="row col-md-12 list-header-row">
@@ -48,39 +48,39 @@
                 <div class="col-6">
                     <a class="offset-5 col-3"
                        th:href="@{/teacher/usun/ocene(ocenaId=${ocena.id}, uczenId=${szczegoly_ucznia.id})}">
-                        <button type="button" class="btn btn-danger col-3">Usuń ocene</button>
+                        <button type="button" class="btn btn-danger guzik-usun col-3">Usuń</button>
                     </a>
                     <a class="col-3"
                        th:href="@{/teacher/edytuj/ocene(ocena_id=${ocena.id}, uczenId=${szczegoly_ucznia.id})}">
-                        <button type="button"  class="btn btn-danger col-3">Edytuj ocene</button>
+                        <button type="button"  class="btn btn-secondary guzik-edytuj col-3">Edytuj</button>
                     </a>
                 </div>
             </div>
         </div>
 
-        <a class="offset-8 col-2" th:href="@{/teacher/dodaj/dyplom(idUcznia=${szczegoly_ucznia.id})}">
-            <button type="button" class="btn btn-danger col-4">Dodaj dyplom</button>
+        <a class="offset-10 col-2" th:href="@{/teacher/dodaj/dyplom(idUcznia=${szczegoly_ucznia.id})}">
+            <button type="button" class="btn btn-success guzik-dodaj col-2">Dodaj dyplom</button>
         </a>
         <div class="row col-md-12 form-container">
             <div class="row col-md-12 list-header-row">
-                <div class="col-3">Średnia ocen</div>
+                <div class="col-2">Średnia ocen</div>
                 <div class="col-3">Typ wyróżnienia</div>
                 <div class="col-3">Opis</div>
                 <div class="col-3"></div>
             </div>
 
             <div th:each="dyplom : ${szczegoly_ucznia.getDyplomy()}" class="row col-md-12 list-data-row">
-                <div class="col-3" th:text="${dyplom.getSredniaOcen()}"></div>
+                <div class="col-2" th:text="${dyplom.getSredniaOcen()}"></div>
                 <div class="col-3" th:text="${dyplom.getTypWyroznienia()}"></div>
                 <div class="col-3" th:text="${dyplom.getOpis()}"></div>
                 <div class="col-3">
                     <a class="offset-5 col-3"
                        th:href="@{/teacher/usun/dyplom(dyplomId=${dyplom.id}, uczenId=${szczegoly_ucznia.id})}">
-                        <button type="button" class="btn btn-danger col-3">Usuń dyplom</button>
+                        <button type="button" class="btn btn-danger guzik-usun col-3">Usuń</button>
                     </a>
                     <a class="col-3"
                         th:href="@{/teacher/edytuj/dyplom(dyplom_id=${dyplom.id}, uczenId=${szczegoly_ucznia.id})}">
-                        <button type="button" class="btn btn-danger col-3">Edytuj dyplom</button>
+                        <button type="button" class="btn btn-secondary guzik-edytuj col-3">Edytuj</button>
                     </a>
                 </div>
             </div>

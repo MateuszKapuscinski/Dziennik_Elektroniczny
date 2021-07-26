@@ -30,13 +30,13 @@
                     <div class="col-md-3" th:text="${klasa.wychowawca.imie + ' ' + klasa.wychowawca.nazwisko}"></div>
                     <div class="col-md-4 row">
                         <a class="col-4" th:href="@{/teacher/usun/klasy(id=${klasa.id})}">
-                            <button type="button" class="col-md-12 btn btn-danger moj-wlasny-styl">Usuń</button>
+                            <button type="button" class="col-md-12 btn btn-danger guzik-usun">Usuń</button>
                         </a>
                         <a class="col-4" th:href="@{/teacher/edytuj(id_klasa=${klasa.id})}">
-                            <button type="button" class="col-md-12 btn btn-secondary">Edytuj</button>
+                            <button type="button" class="col-md-12 btn btn-secondary guzik-edytuj">Edytuj</button>
                         </a>
                         <a class="col-4" th:href="@{'/klasa/szczegoly/' + ${klasa.id}}">
-                            <button type="button" class="col-md-12 btn btn-primary">Szczegóły</button>
+                            <button type="button" class="col-md-12 btn btn-primary guzik-szczegoly">Szczegóły</button>
                         </a>
                     </div>
                     <!--

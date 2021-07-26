@@ -1,91 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8">
-  <title>Hello Teacher Account List!</title>
-  <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+    <meta charset="UTF-8">
+    <title>Hello Teacher Account List!</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
 </head>
 <body>
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <main>
-  <div class="container marketing">
-    <h2>Dane osobowe</h2>
-    <div class="row col-12 form-container" th:object="${konto_ucznia}">
-      <input type="text" th:field="*{uczen.id}" hidden readonly>
-      <div class="row col-md-12 form-input-row">
-        <div class="col-md-6">Imie:</div>
-        <div class="col-md-6" th:text="*{uczen.imie}"></div>
-      </div>
-      <div class="row col-md-12 form-input-row">
-        <div class="col-md-6">Nazwisko:</div>
-        <div class="col-md-6" th:text="*{uczen.nazwisko}"></div>
-      </div>
-      <div class="row col-md-12 form-input-row">
-        <div class="col-md-6">Email:</div>
-        <div class="col-md-6" th:text="*{uczen.email}"></div>
-      </div>
-      <div class="row col-md-12 form-input-row">
-        <div class="col-md-6">Data urodzenia:</div>
-        <div class="col-md-6" th:text="*{uczen.data_urodzenia}"></div>
-      </div>
-    </div>
-    <div class="row col-md-12 form-container">
-      <div class="row col-md-12 list-header-row">
-        <!--          <div class="col-2">Klasa</div>-->
-        <div class="col-md-2">Poziom Klasy</div>
-        <div class="col-md-1">Rocznik</div>
-        <div class="col-md-1">Nazwa</div>
-        <div class="col-md-1">Numer sali</div>
-        <div class="col-md-3">Wychowawca</div>
-        <div class="col-md-4"></div>
-      </div>
-
-      <div th:each="uczen : ${klasy_ucznia}" class="row col-md-12 list-data-row">
-        <div class="col-md-2" th:text="${uczen.getPoziom_klasy()}"></div>
-        <div class="col-md-1" th:text="${uczen.getRocznik()}"></div>
-        <div class="col-md-1" th:text="${uczen.getNazwa()}"></div>
-        <div class="col-md-1" th:text="${uczen.getNumer_sali()}"></div>
-        <div class="col-md-3" th:text="${uczen.wychowawca.imie + ' ' + uczen.wychowawca.nazwisko}"></div>
-        <div class="col-md-4 row">
-        </div>
-      </div>
-    <div class="row col-md-12 form-container">
-      <div class="row col-md-12 list-header-row">
-        <!--          <div class="col-2">Klasa</div>-->
-        <div class="col-3">Przedmiot</div>
-        <div class="col-3">Ocena</div>
-        <div class="col-6"></div>
-        <!--                    <div class="col-2">Dyplomy</div>-->
-      </div>
-
-      <div th:each="uczen : ${oceny_ucznia}" class="row col-md-12 list-data-row">
-        <!--<div class="col-2" th:text="${uczen.getKlasy()}"></div>-->
-        <div class="col-3" th:text="${uczen.getPrzedmiot()}"></div>
-        <div class="col-3" th:text="${uczen.getOcenaWartosc()}"></div>
-        <!--                    <div class="col-2" th:text="${ocena.getUczen().getDyplomy()}"></div>-->
-        <div class="col-6">
-        </div>
-      </div>
-    </div>
-
-
-    <div class="row col-md-12 form-container">
-      <div class="row col-md-12 list-header-row">
-        <div class="col-3">Średnia ocen</div>
-        <div class="col-3">Typ wyróżnienia</div>
-        <div class="col-3">Opis</div>
-        <div class="col-3"></div>
-      </div>
-
-      <div th:each="uczen : ${dyplomy_ucznia}" class="row col-md-12 list-data-row">
-        <div class="col-3" th:text="${uczen.getSredniaOcen()}"></div>
-        <div class="col-3" th:text="${uczen.getTypWyroznienia()}"></div>
-        <div class="col-3" th:text="${uczen.getOpis()}"></div>
-        <div class="col-3">
+    <div class="container marketing">
+        <h2>Dane osobowe</h2>
+        <div class="row col-12 form-container" th:object="${konto_ucznia}">
+            <input type="text" th:field="*{uczen.id}" hidden readonly>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Imie:</div>
+                <div class="col-md-6" th:text="*{uczen.imie}"></div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Nazwisko:</div>
+                <div class="col-md-6" th:text="*{uczen.nazwisko}"></div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Email:</div>
+                <div class="col-md-6" th:text="*{uczen.email}"></div>
+            </div>
+            <div class="row col-md-12 form-input-row">
+                <div class="col-md-6">Data urodzenia:</div>
+                <div class="col-md-6" th:text="*{uczen.data_urodzenia}">
+                </div>
+            </div>
         </div>
 
-      </div>
-    </div>
+        <h2>Klasa</h2>
+        <div class="row col-md-12 form-container">
+            <div class="row col-md-12 list-header-row">
+                <div class="col-md-2">Poziom Klasy</div>
+                <div class="col-md-1">Rocznik</div>
+                <div class="col-md-1">Nazwa</div>
+                <div class="col-md-1">Numer sali</div>
+                <div class="col-md-3">Wychowawca</div>
+                <div class="col-md-4"></div>
+            </div>
+
+            <div th:each="uczen : ${klasy_ucznia}" class="row col-md-12 list-data-row">
+                <div class="col-md-2" th:text="${uczen.getPoziom_klasy()}"></div>
+                <div class="col-md-1" th:text="${uczen.getRocznik()}"></div>
+                <div class="col-md-1" th:text="${uczen.getNazwa()}"></div>
+                <div class="col-md-1" th:text="${uczen.getNumer_sali()}"></div>
+                <div class="col-md-3" th:text="${uczen.wychowawca.imie + ' ' + uczen.wychowawca.nazwisko}"></div>
+                <div class="col-md-2 row">
+                </div>
+            </div>
+        </div>
+
+        <h2>Dyplomy</h2>
+        <div class="row col-md-12 form-container">
+            <div class="row col-md-12 list-header-row">
+                <div class="col-3">Średnia ocen</div>
+                <div class="col-3">Typ wyróżnienia</div>
+                <div class="col-3">Opis</div>
+                <div class="col-3"></div>
+            </div>
+
+            <div th:each="uczen : ${dyplomy_ucznia}" class="row col-md-12 list-data-row">
+                <div class="col-3" th:text="${uczen.getSredniaOcen()}"></div>
+                <div class="col-3" th:text="${uczen.getTypWyroznienia()}"></div>
+                <div class="col-3" th:text="${uczen.getOpis()}"></div>
+                <div class="col-3">
+                </div>
+            </div>
+        </div>
+        <h2>Oceny</h2>
+        <div class="row col-md-12 form-container">
+            <div class="row col-md-12 list-header-row">
+                <div class="col-3">Przedmiot</div>
+                <div class="col-3">Ocena</div>
+                <div class="col-6"></div>
+            </div>
+
+            <div th:each="uczen : ${oceny_ucznia}" class="row col-md-12 list-data-row">
+                <!--<div class="col-2" th:text="${uczen.getKlasy()}"></div>-->
+                <div class="col-3" th:text="${uczen.getPrzedmiot()}"></div>
+                <div class="col-3" th:text="${uczen.getOcenaWartosc()}"></div>
+                <div class="col-6">
+                </div>
+            </div>
+            <div class="row col-md-12 list-header-row kreska">
+                <div class="col-3">Średnia</div>
+                <div class="col-3" th:text="${oceny_ucznia_srednia}"></div>
+                <div class="col-6"></div>
+            </div>
+        </div>
 </main>
 <th:block th:replace="fragments :: scripts" th:remove="tag"/>
 </body>

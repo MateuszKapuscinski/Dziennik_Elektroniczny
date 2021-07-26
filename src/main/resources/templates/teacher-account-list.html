@@ -29,10 +29,10 @@
         <div class="col-3 row">
           <a th:if="${account.getUczen!= null}" class="col-6"
              th:href="@{'/teacher/account/delete/uczen/'+${account.getId()} + '/' + ${account.getUczen().getId()}}">
-            <button type="button" class="btn btn-danger col-12">Usuń</button>
+            <button type="button" class="btn btn-danger col-12 guzik-usun">Usuń</button>
           </a>
           <a class="col-6" th:href="@{/teacher/account/edit/uczen(id_uczen=${account.getUczen().getId()})}">
-            <button type="button" class="btn btn-info col-12">Edytuj konto</button>
+            <button type="button" class="btn btn-info col-12 guzik-edytuj">Edytuj konto</button>
           </a>
         </div>
       </div>

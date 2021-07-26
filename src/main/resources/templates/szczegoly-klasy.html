@@ -32,14 +32,21 @@
                 <div class="col-md-6" th:text="*{wychowawca.imie+' '+ wychowawca.nazwisko}"></div>
             </div>
         </div>
-<!--        GUZIK DODAJ UCZNIA-->
         <a class="col-2" th:href="@{/klasa/dodaj/uczniow(idKlasy=${klasa.id})}">
-            <button type="button" class="btn btn-danger col-4">Dodaj ucznia</button>
+            <button type="button" class="offset-10 btn btn-success guzik-dodaj col-2">Dodaj ucznia</button>
         </a>
+        <div class="row col-md-12">
+            <div class="row col-md-12 list-header-row">
+                <div class="col-md-1">Imie</div>
+                <div class="col-md-2">Nazwisko</div>
+                <div class="col-md-2">Email</div>
+                <div class="col-md-2"></div>
+            </div>
         <div th:each="uczen : ${klasa.getUczniowie()}" class="row col-md-12 list-data-row">
-            <div class="col-2" th:text="${uczen.imie}"></div>
-            <div class="col-2" th:text="${uczen.nazwisko}"></div>
-            <div class="col-2" th:text="${uczen.email}"></div>
+            <div class="col-md-1" th:text="${uczen.imie}"></div>
+            <div class="col-md-2" th:text="${uczen.nazwisko}"></div>
+            <div class="col-md-2" th:text="${uczen.email}"></div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 </main>

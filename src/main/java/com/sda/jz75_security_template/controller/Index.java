@@ -18,9 +18,9 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class Index {
 
-    @GetMapping
+   @GetMapping
     public String getIndex(){
-        return "index";
+        return "redirect:/authenticated";
     }
 
     @GetMapping("/login")
