@@ -38,8 +38,8 @@ public class StudentController {
                 .stream()
                 .mapToDouble(Ocena::getOcenaWartosc)
                 .average();
-
-        String sredniaKomunikat = srednia.isPresent() ? String.valueOf(srednia.getAsDouble()) : "Brak ocen";
+        //
+        String sredniaKomunikat = srednia.isPresent() ? String.format("%.2f", srednia.getAsDouble()) : "Brak ocen";
 
         model.addAttribute("dane_ucznia", uczen);
         model.addAttribute("oceny_ucznia", uczenService.pobierzOcenyUcznia(uczen));

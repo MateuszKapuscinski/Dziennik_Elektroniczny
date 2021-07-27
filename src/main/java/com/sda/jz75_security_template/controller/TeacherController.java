@@ -118,8 +118,8 @@ public class TeacherController {
     }
 
     @GetMapping("/usun/klasy")
-    public String usuwanieKlasy(@RequestParam(name = "id") Long id) {
-        klasaService.usunKlase(id);
+    public String usuwanieKlasy(@RequestParam(name = "id") Long klasaId) {
+        klasaService.usunKlase(klasaId);
         return "redirect:/teacher/lista";
     }
 
